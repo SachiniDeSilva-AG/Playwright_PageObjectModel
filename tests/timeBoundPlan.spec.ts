@@ -10,21 +10,39 @@ test.describe("Time Bound Plan verifications for RSPO Member", async () => {
       })
 
       test('Verify the existing Time Bound Plan Details under the General Information tab', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
-
         await loginPage.userlogin(credentials.userName, credentials.passWord);
         await dashboardPage.verifytheDashboardTitle("Dashboard");
         await dashboardPage.navigatestoEntityModule();
         await entityManagementModule.navigationToTimeBoundPlanPage();
-        await timeBoundPlanPage.verifyTimeBoundPlanDetails_UnderGeneralInformation("TBP25-341087", "9-5638-24-000-00");
-
+        await timeBoundPlanPage.verifyTimeBoundPlanDetails_UnderGeneralInformation("TBP25-341087", "9-5638-24-000-00", "Approved", "12-Feb-2025 11:52:26");
       });
+
+      test('Verify the Update Time Bound Plan section', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+        await loginPage.userlogin(credentials.userName, credentials.passWord);
+        await dashboardPage.verifytheDashboardTitle("Dashboard");
+        await dashboardPage.navigatestoEntityModule();
+        await entityManagementModule.navigationToTimeBoundPlanPage();
+        await timeBoundPlanPage.verifyUpdateTMPlanID("Update Time Bound Plan 37");
+      });
+
+      test('Verify the update of Supply Base inside Update Time Bound Plan', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+        await loginPage.userlogin(credentials.userName, credentials.passWord);
+        await dashboardPage.verifytheDashboardTitle("Dashboard");
+        await dashboardPage.navigatestoEntityModule();
+        await entityManagementModule.navigationToTimeBoundPlanPage();
+        await timeBoundPlanPage.verifyUpdateTMPlanID("Update Time Bound Plan 37");
+        await timeBoundPlanPage.verifyUpdatingOfSupplyBase(timeBoundSearch.tbpSupplyBaseNameSearch, "Edit Existing Supply Base - Disclosure3", "2027", "New Changes");
+    
+      });
+
+
 
       test('Verify the data under the Supply Bases tab', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
         await loginPage.userlogin(credentials.userName, credentials.passWord);
         await dashboardPage.verifytheDashboardTitle("Dashboard");
         await dashboardPage.navigatestoEntityModule();
         await entityManagementModule.navigationToTimeBoundPlanPage();
-        await timeBoundPlanPage.verifyTimeBoundPlanDetails_UnderGeneralInformation("TBP25-341087", "9-5638-24-000-00");
+        await timeBoundPlanPage.verifyTimeBoundPlanDetails_UnderGeneralInformation("TBP25-341087", "9-5638-24-000-00", "Approved","12-Feb-2025 11:52:26");
         await timeBoundPlanPage.navigationForSupplyBasesTab_UnderSupplyBases();
         await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseName(timeBoundSearch.supplyBaseNameSearch);
         await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseName("Disclosure2");
