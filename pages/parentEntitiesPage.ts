@@ -2,16 +2,23 @@ import { Page, expect, Locator } from "@playwright/test"
 
 export default class ParentEntitiesPage {
 
-    readonly timeboundplanid_text: Locator;
+    readonly parentEntities_text: Locator;
   
 
     constructor(public page: Page) {
-        this.timeboundplanid_text = page.locator('//*[@data-testid="timeBoundPlanId-container"]//p[@data-testid="form-text-item-timeBoundPlanId"][text()]');
+        this.parentEntities_text = page.locator('//*[@id="page-id"]//h1[text()]');
     }
 
-    async verifyTimeBoundPlanDetails_UnderGeneralInformation(timeboundplanid: string, memebershipNo: string) {
-        const timeboundplanid_txt = this.timeboundplanid_text
-        await expect(timeboundplanid_txt).toHaveText(timeboundplanid)
+    async verifyParentEntitiesTitle(parententitiestxt: string) {
+        const parentEntities_ttl = this.parentEntities_text
+        await expect(parentEntities_ttl).toHaveText(parententitiestxt, { timeout: 50000 })
+        console.log("-------------Parent Entities page loaded.-----------");
+    }
+
+
+    async verifyParentEntitiesDetails_UnderGeneralInformation(timeboundplanid: string, memebershipNo: string) {
+        const parentEntities_txt = this.parentEntities_text
+        await expect(parentEntities_txt).toHaveText(timeboundplanid)
         console.log("-------------Time Bound Plan Id displayed.-----------")
     }
 }

@@ -8,7 +8,7 @@ test.beforeEach(async ({ page , loginPage}) => {
   await page.goto ('https://prisma-dev.agridence.com/auth/login')
 })
 
-  test('Member Login success with valid credentials for RSPO Member', async ({ page, loginPage , dashboardPage}) => {
+  test('Member Login success with valid credentials for RSPO Member -> PQ-1176', async ({ page, loginPage , dashboardPage}) => {
 
     await loginPage.userlogin(credentials.userName, credentials.passWord)
     await dashboardPage.verifytheDashboardTitle("Dashboard")

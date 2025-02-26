@@ -10,7 +10,7 @@ test.describe("Memberships page verifications for RSPO Member", async () => {
         await page.goto('https://prisma-dev.agridence.com/auth/login')
     })
 
-    test('Verify the Membership Details', async ({ page, loginPage , dashboardPage, userManagementPage, membershipPage, entityManagementModule}) => {
+    test('Verify the Membership Details -> PQ-1183', async ({ page, loginPage , dashboardPage, userManagementPage, membershipPage, entityManagementModule}) => {
 
         await loginPage.userlogin(credentials.userName, credentials.passWord);
         await dashboardPage.verifytheDashboardTitle("Dashboard");

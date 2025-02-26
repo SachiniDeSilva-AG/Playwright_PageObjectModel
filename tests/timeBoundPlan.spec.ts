@@ -9,7 +9,7 @@ test.describe("Time Bound Plan verifications for RSPO Member", async () => {
         await page.goto('https://prisma-dev.agridence.com/auth/login')
       })
 
-      test('Verify the existing Time Bound Plan Details under the General Information tab', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+      test('Verify the existing Time Bound Plan Details under the General Information tab -> PQ-1184', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
         await loginPage.userlogin(credentials.userName, credentials.passWord);
         await dashboardPage.verifytheDashboardTitle("Dashboard");
         await dashboardPage.navigatestoEntityModule();
@@ -17,7 +17,7 @@ test.describe("Time Bound Plan verifications for RSPO Member", async () => {
         await timeBoundPlanPage.verifyTimeBoundPlanDetails_UnderGeneralInformation("TBP25-341087", "9-5638-24-000-00", "Approved", "12-Feb-2025 11:52:26");
       });
 
-      test('Verify the Update Time Bound Plan section', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+      test('Verify the Update Time Bound Plan section -> PQ-1185', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
         await loginPage.userlogin(credentials.userName, credentials.passWord);
         await dashboardPage.verifytheDashboardTitle("Dashboard");
         await dashboardPage.navigatestoEntityModule();
@@ -25,14 +25,22 @@ test.describe("Time Bound Plan verifications for RSPO Member", async () => {
         await timeBoundPlanPage.verifyUpdateTMPlanID("Update Time Bound Plan 37");
       });
 
-      test('Verify the update of Supply Base inside Update Time Bound Plan', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+      test('Verify the update of Supply Base inside Update Time Bound Plan -> PQ-1185', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
         await loginPage.userlogin(credentials.userName, credentials.passWord);
         await dashboardPage.verifytheDashboardTitle("Dashboard");
         await dashboardPage.navigatestoEntityModule();
         await entityManagementModule.navigationToTimeBoundPlanPage();
         await timeBoundPlanPage.verifyUpdateTMPlanID("Update Time Bound Plan 37");
-        await timeBoundPlanPage.verifyUpdatingOfSupplyBase(timeBoundSearch.tbpSupplyBaseNameSearch, "Edit Existing Supply Base - Disclosure3", "2027", "New Changes");
-    
+        await timeBoundPlanPage.verifyUpdatingOfSupplyBase(timeBoundSearch.tbpSupplyBaseNameSearch, "Edit Existing Supply Base - Disclosure3", "2027", "New Changes SupplyBase");
+      });
+
+      test('Verify the update of Mills inside Update Time Bound Plan -> PQ-1185', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+        await loginPage.userlogin(credentials.userName, credentials.passWord);
+        await dashboardPage.verifytheDashboardTitle("Dashboard");
+        await dashboardPage.navigatestoEntityModule();
+        await entityManagementModule.navigationToTimeBoundPlanPage();
+        await timeBoundPlanPage.verifyUpdateTMPlanID("Update Time Bound Plan 37");
+        await timeBoundPlanPage.verifyUpdatingOfMills(timeBoundSearch.tbpSiteName, "Edit Existing Mill - ML25-000360", "2026", "New Changes Mills");
       });
 
 

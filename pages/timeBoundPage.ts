@@ -9,6 +9,7 @@ export default class TimeBoundPlanPage {
     readonly updatePlan_button: Locator;
     readonly timeBoundPlanId: Locator;
     readonly updateTBPsupplyBases: Locator;
+    readonly updateTBPmills: Locator;
     readonly editSupplyBase_button: Locator;
     readonly editExistingSupplyBase: Locator;
     readonly editProposedYear_text: Locator;
@@ -22,6 +23,7 @@ export default class TimeBoundPlanPage {
     readonly supplyBaseReset_button: Locator;
     readonly timeBoundFilterResult: Locator;
     readonly timeBoundSupplyIdFilterResult: Locator;
+    readonly timeBoundSiteNameFilterResult: Locator;
     readonly millsTab_button: Locator;
     readonly millsApplyFilterButton: Locator;
     readonly millsReset_button: Locator;
@@ -42,6 +44,7 @@ export default class TimeBoundPlanPage {
         this.editJustifiChanges_text = page.locator('//*[@id="justificationForChange"]');
         this.confirmUpdates_button = page.locator('//button[@data-testid="form-button-primary-Confirm"]');
         this.successToastmessage = page.locator('//*[@data-testid="feedback-message"]//following-sibling::div[text()]');
+        this.updateTBPmills = page.locator('//button[normalize-space()="Mills"]');
         this.supplyBasesTab_button = page.locator('[data-testid="tabs-supplyBases"]');  
         this.supplyBaseSearchBar_text = page.locator('//h6/parent::div[@data-testid="supply-bases-tab-heading"]/following-sibling::div//input[@id="filterSearch"]');
         this.millsSearchBar_text = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div//input[@id="filterSearch"]');
@@ -49,6 +52,7 @@ export default class TimeBoundPlanPage {
         this.supplyBaseReset_button = page.locator('//h6/parent::div[@data-testid="supply-bases-tab-heading"]/following-sibling::div//button[@data-testid="form-button-destructive-Reset"]');
         this.timeBoundFilterResult = page.locator('//h6/parent::div[@data-testid="supply-bases-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="name"]');
         this.timeBoundSupplyIdFilterResult = page.locator('//h6/parent::div[@data-testid="supply-bases-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="id"]');
+        this.timeBoundSiteNameFilterResult = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="name"]');
         this.millsTab_button = page.locator('[data-testid="tabs-mills"]');
         this.millsApplyFilterButton = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div//button[@data-testid="form-button-primary-Apply filters"]');
         this.millsReset_button = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div//button[@data-testid="form-button-destructive-Reset"]');
@@ -71,7 +75,7 @@ export default class TimeBoundPlanPage {
 
         const dateOfApprival_txt = this.dateOfApprival
         await expect(dateOfApprival_txt).toHaveText(approvedDate)
-        console.log("-------------Apprival Date is displayed.-----------")
+        console.log("-------------Approval Date is displayed.-----------")
     }
 
     async navigationForSupplyBasesTab_UnderSupplyBases(){
@@ -195,6 +199,46 @@ export default class TimeBoundPlanPage {
         const successToastmsg = this.successToastmessage;
         await successToastmsg.isVisible();
         console.log("-------------Success toast message displayed.-------------");
+    }
+
+    async verifyUpdatingOfMills(tbpMills, nameOftheExistingMill, year:string, changes) {
+        const updateTBPmills_btn = this.updateTBPmills
+        await updateTBPmills_btn.click();
+        console.log("-------------Reditrect to Mills.-------------");
+
+        const updateTBPmills_txt = this.millsSearchBar_text
+        await updateTBPmills_txt.fill(tbpMills);
+        console.log("-------------Site name " + tbpMills + " added.-------------");
+
+        const updateTbPapplyFilterBtn = this.millsApplyFilterButton 
+        await updateTbPapplyFilterBtn.click({timeout : 20000});
+        const timeBoundSiteNameFilterRslt = this.timeBoundSiteNameFilterResult.first();
+        await expect(timeBoundSiteNameFilterRslt).toHaveText(tbpMills); 
+        console.log("-------------Filtered results displayed.-------------");
+
+        const editMills_btn = this.editSupplyBase_button
+        await editMills_btn.click();
+
+        const editExistingMills_dialog = this.editExistingSupplyBase
+        await expect(editExistingMills_dialog).toHaveText(nameOftheExistingMill);
+        console.log("-------------Edit Existing Mill window displayed.-------------");
+
+        const editProposedYear_txt = this.editProposedYear_text;
+        await editProposedYear_txt.clear();
+        await editProposedYear_txt.fill(year);
+        console.log("-------------Proposed year added.-------------");
+
+        const editJustifiChanges_txt = this.editJustifiChanges_text;
+        await editJustifiChanges_txt.clear();
+        await editJustifiChanges_txt.fill(changes);
+        console.log("-------------New changes added.-------------");
+
+        const confirmUpdates_btn = this.confirmUpdates_button;
+        await confirmUpdates_btn.click();
+        const successToastmsg = this.successToastmessage;
+        await successToastmsg.isVisible();
+        console.log("-------------Success toast message displayed.-------------");
+
     }
 
     
