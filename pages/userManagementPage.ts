@@ -26,6 +26,10 @@ export default class UserManagementPage {
     readonly inviteSuccess_text: Locator;
     readonly inviteOkay_button: Locator;
     readonly removeUser_button: Locator;
+    readonly itemsOnFirstPage: Locator;
+    readonly dialogClose_button: Locator;
+    readonly dialogLeaveThisPage: Locator;
+    readonly dialogStayOnThePage: Locator;
 
 
     constructor(public page: Page) {
@@ -35,13 +39,11 @@ export default class UserManagementPage {
         this.apply_btn = page.getByTestId('form-button-primary-Apply filters');
         this.reset_btn = page.getByTestId('form-button-destructive-Reset');
         this.userEmailfilterResult = page.locator('//*[@id="page-id"]//div[@role="cell"][@data-field="email"]/div[@title="qatstprisma+golivesachini@gmail.com"]');
-       // this.useridfilterResult = page.locator('//*[@id="page-id"]//div[@role="cell"][@data-field="userId"]');
-       // this.fullnamefilterResult = page.locator('//*[@id="page-id"]//div[@role="cell"][@data-field="fullName"]');
         this.useridfilterResult = page.locator('//*[@id="page-id"]//div[@role="cell"][@data-field="userId"]/div[@title="U25-1875384"]');
         this.fullnamefilterResult = page.locator('//*[@id="page-id"]//div[@role="cell"][@data-field="fullName"]/div[contains(text(),"Sachini_golive deSilva")]');
-       //this.userfilterResult = page.locator("//div[@role='row']/div[@role='cell']");
         this.addexistingUser_button = page.getByTestId('add-exist-user-btn');
-        this.addexistingUser_text = page.getByTestId('typography-h4');
+        //this.addexistingUser_text = page.getByTestId('typography-h4');
+        this.addexistingUser_text = page.locator('.MuiPaper-root.MuiDialog-paperWidthMd.MuiDialog-paperFullWidth h4');
         this.addexistingUserNext_bttton = page.getByTestId('form-button-primary-Next');
         this.searchbyidoremail_text = page.getByPlaceholder('Search by Prisma User ID or');
         this.selectemailoption = page.getByRole('option', { name: 'U25-1875384, qatstprisma+' });
@@ -57,6 +59,11 @@ export default class UserManagementPage {
         this.inviteOkay_button = page.locator('//div[@role="dialog"]//button[text()="Okay"]');
         this.remove_button = page.getByRole('button', { name: 'Remove' });
         this.removeUser_button = page.locator('//div[@data-testid="delete-users-confirmation"]//button[text()="Remove"]');
+        this.itemsOnFirstPage = page.locator('//*[@class="MuiDataGrid-virtualScrollerRenderZone css-1inm7gi"]/div[@class="MuiDataGrid-row"]');
+        this.dialogClose_button = page.locator('//div/button[@data-testid="close-dialog-btn"]');
+        this.dialogLeaveThisPage = page.locator('//div/button[text()="Leave this page"]');
+        this.dialogStayOnThePage = page.locator('//div/button[text()="Stay on this page"]');
+
 
     }
 
@@ -250,6 +257,54 @@ export default class UserManagementPage {
          const removeUser_btn = this.removeUser_button
          await removeUser_btn.click();
         console.log("---------Remove User from the list.---------");
+    }
+    
+    async verifyCloseAndLeaveThePageOfAddExistingUserUsingEmailID(addexistinguser: string) {
+        const addexistingUser_btn = this.addexistingUser_button
+        await addexistingUser_btn.click();
+        const addexistingUser_txt = this.addexistingUser_text
+        await expect(addexistingUser_txt).toHaveText(addexistinguser)
+        console.log("---------Add existing user popup displayed.---------")
+
+        const addexistingUserNext_btn = this.addexistingUserNext_bttton
+        await addexistingUserNext_btn.click({ force: true });
+
+        const searchbyidoremail_txt = this.searchbyidoremail_text
+        await searchbyidoremail_txt.fill("qatstprisma+golivesachini@gmail.com", { timeout: 30000 });
+        await searchbyidoremail_txt.press('Enter')
+        console.log("---------Search results displayed for email search.---------")
+        await this.selectemailoption.click();
+
+        const addExistingClose_btn = this.dialogClose_button;
+        await addExistingClose_btn.click();
+
+        const addExistingLeavePage = this.dialogLeaveThisPage;
+        await addExistingLeavePage.click();
+        console.log("---------Navigated to the User Management page.---------");
+    }
+    async verifyCloseAndStayOnThePageOfAddExistingUserUsingEmailID(addexistinguser: string) {
+        const addexistingUser_btn = this.addexistingUser_button
+        await addexistingUser_btn.click();
+        const addexistingUser_txt = this.addexistingUser_text
+        await expect(addexistingUser_txt).toHaveText(addexistinguser);
+        console.log("---------Add existing user popup displayed.---------")
+
+        const addexistingUserNext_btn = this.addexistingUserNext_bttton
+        await addexistingUserNext_btn.click({ force: true });
+
+        const searchbyidoremail_txt = this.searchbyidoremail_text
+        await searchbyidoremail_txt.fill("qatstprisma+golivesachini@gmail.com", { timeout: 30000 });
+        await searchbyidoremail_txt.press('Enter')
+        console.log("---------Search results displayed for email search.---------")
+        await this.selectemailoption.click();
+
+        const addExistingClose_btn = this.dialogClose_button;
+        await addExistingClose_btn.click();
+        
+        const addExistingStayOnPage = this.dialogStayOnThePage;
+        await addExistingStayOnPage.click();
+        await expect(addexistingUser_txt).toHaveText(addexistinguser);
+        console.log("---------Stay on the same page.---------");
     }
 
 }

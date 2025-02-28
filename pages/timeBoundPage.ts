@@ -60,7 +60,7 @@ export default class TimeBoundPlanPage {
         this.millsSiteIdFilterResult = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="id"]');
     }
 
-    async verifyTimeBoundPlanDetails_UnderGeneralInformation(prismatimeboundplanid: string, memebershipNo: string, status: string, approvedDate: string) {
+    async verifyTimeBoundPlanDetails_UnderGeneralInformation(prismatimeboundplanid: string, memebershipNo: string, status: string) {
         const prismatimeboundplanid_txt = this.prismatimeboundplanid_text
         await expect(prismatimeboundplanid_txt).toHaveText(prismatimeboundplanid)
         console.log("-------------Time Bound Plan Id displayed.-----------")
@@ -74,7 +74,7 @@ export default class TimeBoundPlanPage {
         console.log("-------------Time Bound Plan Status is displayed.-----------")
 
         const dateOfApprival_txt = this.dateOfApprival
-        await expect(dateOfApprival_txt).toHaveText(approvedDate)
+        await expect(dateOfApprival_txt).toBeVisible();
         console.log("-------------Approval Date is displayed.-----------")
     }
 

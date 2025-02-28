@@ -57,4 +57,32 @@ test.describe("User Management page verifications for RSPO Member", async () => 
     await userManagementPage.selectLastEmailAndRemove();
   });
 
+  test('Verify leave this page in the add existing user dialog, after adding the email address -> PQ-686', async ({loginPage, userManagementPage, dashboardPage, page }) => {
+    await loginPage.userlogin(credentials.userName, credentials.passWord);
+    await dashboardPage.verifytheDashboardTitle("Dashboard");
+    await dashboardPage.navigatestoEntityModule();
+    await userManagementPage.verifyUserManagementTitle("User management");
+    await userManagementPage.verifyCloseAndLeaveThePageOfAddExistingUserUsingEmailID("Add existing user");
+    await userManagementPage.verifyUserManagementTitle("User management");
+  })
+
+  test('Verify stay on this page in the add existing user dialog, after adding the email address -> PQ-685', async ({loginPage, userManagementPage, dashboardPage, page }) => {
+    await loginPage.userlogin(credentials.userName, credentials.passWord);
+    await dashboardPage.verifytheDashboardTitle("Dashboard");
+    await dashboardPage.navigatestoEntityModule();
+    await userManagementPage.verifyUserManagementTitle("User management");
+    await userManagementPage.verifyCloseAndStayOnThePageOfAddExistingUserUsingEmailID("Add existing user");
+    await userManagementPage.verifyUserManagementTitle("User management");
+  })
+
+
+
+  test('Verify results not found in the add existing user, when the user is not an existing user ', async ({loginPage, userManagementPage, dashboardPage, page }) => {
+    await loginPage.userlogin(credentials.userName, credentials.passWord);
+    await dashboardPage.verifytheDashboardTitle("Dashboard");
+    await dashboardPage.navigatestoEntityModule();
+    await userManagementPage.verifyUserManagementTitle("User management");
+
+  })
+
 })

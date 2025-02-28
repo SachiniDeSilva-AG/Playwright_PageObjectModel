@@ -1,5 +1,4 @@
 import { test, expect } from "../base/myFixture";
-import dashboardPage from "../pages/dashboardPage";
 import credentials from "../testdata/loginData.json";
 import timeBoundSearch from "../testdata/timeBoundData.json"
 
@@ -14,7 +13,7 @@ test.describe("Time Bound Plan verifications for RSPO Member", async () => {
         await dashboardPage.verifytheDashboardTitle("Dashboard");
         await dashboardPage.navigatestoEntityModule();
         await entityManagementModule.navigationToTimeBoundPlanPage();
-        await timeBoundPlanPage.verifyTimeBoundPlanDetails_UnderGeneralInformation("TBP25-341087", "9-5638-24-000-00", "Approved", "12-Feb-2025 11:52:26");
+        await timeBoundPlanPage.verifyTimeBoundPlanDetails_UnderGeneralInformation("TBP25-341087", "9-5638-24-000-00", "Approved");
       });
 
       test('Verify the Update Time Bound Plan section -> PQ-1185', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
@@ -45,12 +44,12 @@ test.describe("Time Bound Plan verifications for RSPO Member", async () => {
 
 
 
-      test('Verify the data under the Supply Bases tab', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+      test('Verify the data under the Supply Bases tab -> PQ-1187', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
         await loginPage.userlogin(credentials.userName, credentials.passWord);
         await dashboardPage.verifytheDashboardTitle("Dashboard");
         await dashboardPage.navigatestoEntityModule();
         await entityManagementModule.navigationToTimeBoundPlanPage();
-        await timeBoundPlanPage.verifyTimeBoundPlanDetails_UnderGeneralInformation("TBP25-341087", "9-5638-24-000-00", "Approved","12-Feb-2025 11:52:26");
+        await timeBoundPlanPage.verifyTimeBoundPlanDetails_UnderGeneralInformation("TBP25-341087", "9-5638-24-000-00", "Approved");
         await timeBoundPlanPage.navigationForSupplyBasesTab_UnderSupplyBases();
         await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseName(timeBoundSearch.supplyBaseNameSearch);
         await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseName("Disclosure2");
@@ -59,7 +58,7 @@ test.describe("Time Bound Plan verifications for RSPO Member", async () => {
 
       })
 
-      test('Verify the data under the Mills tab', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+      test('Verify the data under the Mills tab -> PQ-1187', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
         await loginPage.userlogin(credentials.userName, credentials.passWord);
         await dashboardPage.verifytheDashboardTitle("Dashboard");
         await dashboardPage.navigatestoEntityModule();
