@@ -1,6 +1,6 @@
 import { Page, expect, Locator } from "@playwright/test"
 
-export default class UserManagementPage {
+export default class UserManagementPage { 
     readonly usermanagement_text: Locator;
     readonly searchBar_text: Locator;
     readonly apply_btn: Locator;
@@ -30,6 +30,8 @@ export default class UserManagementPage {
     readonly dialogClose_button: Locator;
     readonly dialogLeaveThisPage: Locator;
     readonly dialogStayOnThePage: Locator;
+    readonly dialogBack_button: Locator;
+    readonly addExistingNoResults_text: Locator;
 
 
     constructor(public page: Page) {
@@ -42,7 +44,6 @@ export default class UserManagementPage {
         this.useridfilterResult = page.locator('//*[@id="page-id"]//div[@role="cell"][@data-field="userId"]/div[@title="U25-1875384"]');
         this.fullnamefilterResult = page.locator('//*[@id="page-id"]//div[@role="cell"][@data-field="fullName"]/div[contains(text(),"Sachini_golive deSilva")]');
         this.addexistingUser_button = page.getByTestId('add-exist-user-btn');
-        //this.addexistingUser_text = page.getByTestId('typography-h4');
         this.addexistingUser_text = page.locator('.MuiPaper-root.MuiDialog-paperWidthMd.MuiDialog-paperFullWidth h4');
         this.addexistingUserNext_bttton = page.getByTestId('form-button-primary-Next');
         this.searchbyidoremail_text = page.getByPlaceholder('Search by Prisma User ID or');
@@ -63,6 +64,8 @@ export default class UserManagementPage {
         this.dialogClose_button = page.locator('//div/button[@data-testid="close-dialog-btn"]');
         this.dialogLeaveThisPage = page.locator('//div/button[text()="Leave this page"]');
         this.dialogStayOnThePage = page.locator('//div/button[text()="Stay on this page"]');
+        this.dialogBack_button = page.locator('//button[text()="Back"]');
+        this.addExistingNoResults_text= page.locator('//div/p[@data-testid="typography-body2"][text()]');
 
 
     }
@@ -121,7 +124,7 @@ export default class UserManagementPage {
 
     }
 
-    async verifytheAddExistingUserUsingEmail(addexistinguser: string) {
+    async verifytheAddExistingUserUsingEmail(addexistinguser: string,emailsearch) {
         const addexistingUser_btn = this.addexistingUser_button
         await addexistingUser_btn.click();
         const addexistingUser_txt = this.addexistingUser_text
@@ -132,7 +135,7 @@ export default class UserManagementPage {
         await addexistingUserNext_btn.click({ force: true });
 
         const searchbyidoremail_txt = this.searchbyidoremail_text
-        await searchbyidoremail_txt.fill("qatstprisma+golivesachini@gmail.com", { timeout: 30000 });
+        await searchbyidoremail_txt.fill(emailsearch, { timeout: 30000 });
         await searchbyidoremail_txt.press('Enter')
         console.log("---------Search results displayed for email search.---------")
         await this.selectemailoption.click();
@@ -143,7 +146,7 @@ export default class UserManagementPage {
         await expect(addExistUserFeedback_msg).toHaveText(/New users added/);
     }
 
-    async verifytheAddExistingUserUsingPrismaId(addexistinguser: string) {
+    async verifytheAddExistingUserUsingPrismaId(addexistinguser: string, userid) {
         const addexistingUser_btn = this.addexistingUser_button
         await addexistingUser_btn.click();
         const addexistingUser_txt = this.addexistingUser_text
@@ -154,7 +157,7 @@ export default class UserManagementPage {
         await addexistingUserNext_btn.click({ force: true });
 
         const searchbyidoremail_txt = this.searchbyidoremail_text
-        await searchbyidoremail_txt.fill("PR-U-032024-000000013", { timeout: 30000 });
+        await searchbyidoremail_txt.fill(userid, { timeout: 30000 });
         await searchbyidoremail_txt.press('Enter')
         await this.selectemailoption.click();
         console.log("---------Search results displayed for prismaId search.---------")
@@ -188,14 +191,14 @@ export default class UserManagementPage {
 
         function generateEmail(): string {
             const dayOfYear = getDayOfYear();  // Get the current day of the year
-           emailCounter++;
+            emailCounter++;
             const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0'); 
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
 
     // Combine day of the year, current time, and email counter
     const email = `qatstprisma+sachini${dayOfYear}_${year}${month}${day}_${hours}${minutes}${seconds}_${emailCounter}@gmail.com`;
@@ -259,7 +262,7 @@ export default class UserManagementPage {
         console.log("---------Remove User from the list.---------");
     }
     
-    async verifyCloseAndLeaveThePageOfAddExistingUserUsingEmailID(addexistinguser: string) {
+    async verifyCloseAndLeaveThePageOfAddExistingUserUsingEmailID(addexistinguser: string, emailsearch) {
         const addexistingUser_btn = this.addexistingUser_button
         await addexistingUser_btn.click();
         const addexistingUser_txt = this.addexistingUser_text
@@ -270,7 +273,7 @@ export default class UserManagementPage {
         await addexistingUserNext_btn.click({ force: true });
 
         const searchbyidoremail_txt = this.searchbyidoremail_text
-        await searchbyidoremail_txt.fill("qatstprisma+golivesachini@gmail.com", { timeout: 30000 });
+        await searchbyidoremail_txt.fill(emailsearch, { timeout: 30000 });
         await searchbyidoremail_txt.press('Enter')
         console.log("---------Search results displayed for email search.---------")
         await this.selectemailoption.click();
@@ -282,7 +285,7 @@ export default class UserManagementPage {
         await addExistingLeavePage.click();
         console.log("---------Navigated to the User Management page.---------");
     }
-    async verifyCloseAndStayOnThePageOfAddExistingUserUsingEmailID(addexistinguser: string) {
+    async verifyCloseAndStayOnThePageOfAddExistingUserUsingEmailID(addexistinguser: string, emailsearch) {
         const addexistingUser_btn = this.addexistingUser_button
         await addexistingUser_btn.click();
         const addexistingUser_txt = this.addexistingUser_text
@@ -293,7 +296,7 @@ export default class UserManagementPage {
         await addexistingUserNext_btn.click({ force: true });
 
         const searchbyidoremail_txt = this.searchbyidoremail_text
-        await searchbyidoremail_txt.fill("qatstprisma+golivesachini@gmail.com", { timeout: 30000 });
+        await searchbyidoremail_txt.fill(emailsearch, { timeout: 30000 });
         await searchbyidoremail_txt.press('Enter')
         console.log("---------Search results displayed for email search.---------")
         await this.selectemailoption.click();
@@ -307,5 +310,95 @@ export default class UserManagementPage {
         console.log("---------Stay on the same page.---------");
     }
 
-}
+    async verifyCloseAndLeaveThePageOfInvitingNewUserUserUsingEmailID(inviteuser: string) {
+        const inviteUser_btn = this.inviteUser_button
+        await inviteUser_btn.waitFor({ state: 'visible' });
+        await inviteUser_btn.click();
+        const inviteUser_txt = this.inviteUser_text
+        await inviteUser_txt.waitFor({ state: 'visible' });
+        await expect(inviteUser_txt).toHaveText(inviteuser)
+        console.log("---------Invite user popup displayed.---------")
 
+        await this.inviteUserNext_button.click({ force: true });
+
+        let emailCounter = 1;
+        function getDayOfYear(): number {
+            const start = new Date(new Date().getFullYear(), 0, 0);
+            const diff = new Date().getTime() - start.getTime();
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+            return dayOfYear;
+        }
+        function generateEmail(): string {
+            const dayOfYear = getDayOfYear();  // Get the current day of the year
+            emailCounter++;
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    // Combine day of the year, current time, and email counter
+    const email = `qatstprisma+sachini${dayOfYear}_${year}${month}${day}_${hours}${minutes}${seconds}_${emailCounter}@gmail.com`;
+
+    return email;
+        }
+        const searchInviteUserEmail_txt = this.searchInviteUserEmail_text
+        const newEmail = generateEmail();  // Get the new email
+        console.log(`Generated new email: ${newEmail}`);
+        await searchInviteUserEmail_txt.fill(newEmail, { timeout: 30000 });
+
+        await searchInviteUserEmail_txt.press('Enter')
+        console.log("---------Search results displayed for email search.---------")
+
+        const newUserClose_btn = this.dialogClose_button;
+        await newUserClose_btn.click();
+
+        const newUserLeavePage = this.dialogLeaveThisPage;
+        await newUserLeavePage.click();
+        console.log("---------Navigated to the User Management page.---------");
+} 
+
+async verifyBackOfAddExistingUserUsingEmailID(addexistinguser: string, emailsearch) {
+    const addexistingUser_btn = this.addexistingUser_button
+    await addexistingUser_btn.click();
+    const addexistingUser_txt = this.addexistingUser_text
+    await expect(addexistingUser_txt).toHaveText(addexistinguser);
+    console.log("---------Add existing user popup displayed.---------")
+
+    const addexistingUserNext_btn = this.addexistingUserNext_bttton
+    await addexistingUserNext_btn.click({ force: true });
+
+    const searchbyidoremail_txt = this.searchbyidoremail_text
+    await searchbyidoremail_txt.fill(emailsearch, { timeout: 30000 });
+    await searchbyidoremail_txt.press('Enter')
+    console.log("---------Search results displayed for email search.---------")
+    await this.selectemailoption.click();
+
+    const addExistingBack_btn = this.dialogBack_button;
+    await addExistingBack_btn.click();
+    await expect(addexistingUser_txt).toHaveText(addexistinguser);
+    console.log("---------Stay on the Add Existing user page.---------");
+}
+async verifyNoResultsForAddExistingUserUsingEmailID(addexistinguser: string, notExistingEmail) {
+    const addexistingUser_btn = this.addexistingUser_button
+    await addexistingUser_btn.click();
+    const addexistingUser_txt = this.addexistingUser_text
+    await expect(addexistingUser_txt).toHaveText(addexistinguser);
+    console.log("---------Add existing user popup displayed.---------")
+
+    const addexistingUserNext_btn = this.addexistingUserNext_bttton
+    await addexistingUserNext_btn.click({ force: true });
+
+    const searchbyidoremail_txt = this.searchbyidoremail_text
+    await searchbyidoremail_txt.fill(notExistingEmail, { timeout: 30000 });
+    await searchbyidoremail_txt.press('Enter');
+    const addExistingNoResults_txt = this.addExistingNoResults_text;
+    await expect(addExistingNoResults_txt).toBeVisible();
+    console.log("---------No Results found error displayed.---------")
+    
+
+}
+}
