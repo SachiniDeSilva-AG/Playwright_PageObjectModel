@@ -4,9 +4,9 @@ import timeBoundSearch from "../testdata/timeBoundData.json"
 
 test.describe("Time Bound Plan verifications for RSPO Member", async () => {
 
-    test.beforeEach(async ({ page, loginPage }) => {
-        await page.goto('https://prisma-dev.agridence.com/auth/login')
-      })
+  test.beforeEach(async ({ basePage }) => {
+    basePage.initialize();
+})
 
       test('Verify the existing Time Bound Plan Details under the General Information tab -> PQ-1184', async ({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
         await loginPage.userlogin(credentials.userName, credentials.passWord);

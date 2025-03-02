@@ -5,9 +5,9 @@ import userSearch from "../testdata/userData.json"
 
 test.describe("User Management page verifications for RSPO Member", async () => {
 
-  test.beforeEach(async ({ page, loginPage }) => {
-    await page.goto('https://prisma-dev.agridence.com/auth/login')
-  })
+  test.beforeEach(async ({ basePage }) => {
+    basePage.initialize();
+})
 
   test('Verify the navigation to user management page -> PQ-1177', async ({ loginPage, dashboardPage, userManagementPage }) => {
     await loginPage.userlogin(credentials.userName, credentials.passWord)

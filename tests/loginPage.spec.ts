@@ -4,8 +4,8 @@ import credentials from "../testdata/loginData.json"
 
 test.describe(" Login test cases", async () => {
 
-test.beforeEach(async ({ page , loginPage}) => {
-  await page.goto ('https://prisma-dev.agridence.com/auth/login')
+  test.beforeEach(async ({ basePage }) => {
+    basePage.initialize();
 })
 
   test('Member Login success with valid credentials for RSPO Member -> PQ-1176', async ({ page, loginPage , dashboardPage}) => {

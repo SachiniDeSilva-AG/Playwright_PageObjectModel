@@ -6,6 +6,7 @@ import EntityManagementModule from "../pages/entityManagementModule";
 import MembershipPage from "../pages/membershipsPage";
 import TimeBoundPlanPage from "../pages/timeBoundPage";
 import ParentEntitiesPage from "../pages/parentEntitiesPage";
+import BasePage from "../pages/basePage";
 
 
 type pages = {
@@ -16,6 +17,7 @@ type pages = {
     membershipPage : MembershipPage;
     timeBoundPlanPage : TimeBoundPlanPage;
     parentEntitiesPage : ParentEntitiesPage;
+    basePage: BasePage;
 }
 
 const testPages = base.extend<pages>({
@@ -40,6 +42,9 @@ const testPages = base.extend<pages>({
     },
     parentEntitiesPage : async({page}, use) => {
         await use(new ParentEntitiesPage(page))
+    },
+    basePage : async({page,baseURL}, use) => {
+        await use(new BasePage(page,`${baseURL}`))
     }
 
 })

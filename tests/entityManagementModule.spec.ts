@@ -5,8 +5,8 @@ import EntityManagementModule from "../pages/entityManagementModule";
 
 test.describe("User Management page verifications for RSPO Member", async () => {
 
-    test.beforeEach(async ({ page, loginPage }) => {
-        await page.goto('https://prisma-dev.agridence.com/auth/login')
+    test.beforeEach(async ({ basePage }) => {
+        basePage.initialize();
     })
 
     // test('Verify the details in the membership page', async ({ page, loginPage, dashboardPage, userManagementPage, entityManagementModule, membershipPage }) => {
