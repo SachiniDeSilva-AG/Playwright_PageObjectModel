@@ -3,8 +3,19 @@
     "supplyBaseIdSearch":"SB25-015100",
     "siteNameSearch":"Mill 1 Audit POMS Sachini Go Live",
     "siteBusinessId":"ML25-000360",
+    "millTypeList":"New",
+    "millSiteBusinessId":"ML25-000417",
     "tbpSupplyBaseNameSearch":"Disclosure3",
     "tbpsupplyBaseIdSearch":"SB25-015097",
     "tbpSiteName":"Mill 2 Audit POMS Sachini Go Live",
-    "tbpSiteBusinessId": "ML25-000361"
+    "tbpSiteBusinessId": "ML25-000361",
+    "supplyTypeList":"New",
+    "justificationSupplyBaseId": "SB25-015100",
+    "justificationSupplyBaseName": "Disclosure3",
+     "justificationSiteBusinessId": "ML25-000360",
+    "justificationPlanYear": "2026",
+    "nonExistSupplyBaseId" : "SB25-0151310",
+    "nonExistingSupplyBaseName": "Disclosure4",
+    "nonExistSieBusinessId" : "ML25-0003650",
+    "nonExistingSiteName": "Site 01"
 }

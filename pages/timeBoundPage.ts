@@ -29,6 +29,19 @@ export default class TimeBoundPlanPage {
     readonly millsReset_button: Locator;
     readonly millsSiteNameFilterResult: Locator;
     readonly millsSiteIdFilterResult: Locator;
+    readonly millsTypeFilterResult: Locator;
+    readonly millsAssetTypeContainer: Locator;
+    readonly millsType_list: Locator;
+    readonly supplyAssetTypeContainer: Locator;
+    readonly timeBoundSupplTypeFilterResult:Locator;
+    readonly supplyJustificationFilterResult: Locator;
+    readonly justificationSupplyBaseIdText:Locator;
+    readonly justificationSupplyBaseNameText:Locator;
+    readonly justificationDialogClose_button: Locator;
+    readonly millsJustificationFilterResult: Locator;
+    readonly justificationSiteBusinessIdText: Locator;
+    readonly justificationPlanYearText:Locator;
+    readonly noDataAvailable_text: Locator;
 
     constructor(public page: Page) {
         this.prismatimeboundplanid_text = page.locator('//*[@data-testid="timeBoundPlanId-container"]//p[@data-testid="form-text-item-timeBoundPlanId"][text()]');
@@ -52,12 +65,25 @@ export default class TimeBoundPlanPage {
         this.supplyBaseReset_button = page.locator('//h6/parent::div[@data-testid="supply-bases-tab-heading"]/following-sibling::div//button[@data-testid="form-button-destructive-Reset"]');
         this.timeBoundFilterResult = page.locator('//h6/parent::div[@data-testid="supply-bases-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="name"]');
         this.timeBoundSupplyIdFilterResult = page.locator('//h6/parent::div[@data-testid="supply-bases-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="id"]');
+        this.timeBoundSupplTypeFilterResult = page.locator('//h6/parent::div[@data-testid="supply-bases-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="type"]');
+        this.supplyJustificationFilterResult = page.locator('//h6/parent::div[@data-testid="supply-bases-tab-heading"]/following-sibling::div//div[@data-field="justificationForChange"]/button');
         this.timeBoundSiteNameFilterResult = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="name"]');
         this.millsTab_button = page.locator('[data-testid="tabs-mills"]');
         this.millsApplyFilterButton = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div//button[@data-testid="form-button-primary-Apply filters"]');
         this.millsReset_button = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div//button[@data-testid="form-button-destructive-Reset"]');
         this.millsSiteNameFilterResult = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="name"]');
         this.millsSiteIdFilterResult = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="id"]');
+        this.millsTypeFilterResult = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div/div[@class="MuiBox-root css-0"]//div[@role="grid"]//div[@class="MuiDataGrid-virtualScroller css-1pzb349"]//div[@data-field="type"]');
+        this.millsType_list = page.locator('//*[@class="MuiList-root MuiList-padding MuiMenu-list css-r8u8y9"][@role="listbox"]/li');
+        this.millsAssetTypeContainer = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div/form//div[@data-testid="assetType-container"]');
+        this.supplyAssetTypeContainer = page.locator('//h6/parent::div[@data-testid="supply-bases-tab-heading"]/following-sibling::div/form//div[@data-testid="assetType-container"]');
+        this.justificationSupplyBaseIdText = page.locator('//*[@id="justification-flex-container"]//p[@data-testid="form-text-item-id"]');
+        this.justificationSupplyBaseNameText = page.locator('//*[@id="justification-flex-container"]//p[@data-testid="form-text-item-name"]');
+        this.justificationDialogClose_button = page.locator('//div[@class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiDialog-paperFullWidth css-19xjj5i"]/button[@data-testid="close-dialog-btn"]');
+        this.millsJustificationFilterResult = page.locator('//h6/parent::div[@data-testid="mills-tab-heading"]/following-sibling::div//div[@data-field="justificationForChange"]/button');
+        this.justificationSiteBusinessIdText = page.locator('//*[@id="justification-flex-container"]//p[@data-testid="form-text-item-id"]');
+        this.justificationPlanYearText = page.locator('//*[@id="justification-flex-container"]//p[@data-testid="form-text-item-planYearForCertification"]');
+        this.noDataAvailable_text = page.locator('//*[@id="page-id"]//h6[@data-testid="typography-subtitle1"][text()]');
     }
 
     async verifyTimeBoundPlanDetails_UnderGeneralInformation(prismatimeboundplanid: string, memebershipNo: string, status: string) {
@@ -99,7 +125,7 @@ export default class TimeBoundPlanPage {
         await supplyBaseReset_btn.click();
     }
 
-    async verifyFilterSearchUsingSupplyBaseID(supplyBaseId: string) {
+    async verifyFilterSearchUsingSupplyBaseIDAndType(supplyBaseId: string, type: string) {
         const supplyBaseSearchBar_txt = this.supplyBaseSearchBar_text
         await supplyBaseSearchBar_txt.fill(supplyBaseId);
         console.log("-------------Supply base ID " + supplyBaseId + " added.-------------");
@@ -111,6 +137,17 @@ export default class TimeBoundPlanPage {
         console.log("-------------Filtered results displayed.-------------");
 
         const supplyBaseReset_btn = this.supplyBaseReset_button
+        await supplyBaseReset_btn.click();
+
+        const supplyAssetTypeCnt = this.supplyAssetTypeContainer
+        await supplyAssetTypeCnt.click();
+
+        await this.page.locator('//*[@class="MuiList-root MuiList-padding MuiMenu-list css-r8u8y9"][@role="listbox"]/li',{hasText:'New'}).click({ timeout: 60000 });
+        await applyFilterBtn.click();
+        const timeBoundSupplTypeFilterRslt = this.timeBoundSupplTypeFilterResult.first();
+        await expect(timeBoundSupplTypeFilterRslt).toHaveText('New'); 
+        console.log("-------------Filtered type result is displayed.-------------");
+
         await supplyBaseReset_btn.click();
     }
 
@@ -136,7 +173,7 @@ export default class TimeBoundPlanPage {
         await millsReset_btn.click();
     }
 
-    async verifyFilterSearchUsingSiteId(siteId: string) {
+    async verifyFilterSearchUsingSiteIdAndType(siteId: string, type: string) {
         const millsSearchBar_txt = this.millsSearchBar_text
         await millsSearchBar_txt.fill(siteId)
         console.log("-------------Site Business Id " + siteId + " added.-------------")
@@ -150,6 +187,18 @@ export default class TimeBoundPlanPage {
 
         const millsReset_btn = this.millsReset_button
         await millsReset_btn.click();
+
+        const millsAssetTypeCnt = this.millsAssetTypeContainer
+        await millsAssetTypeCnt.click();
+
+        await this.page.locator('//*[@class="MuiList-root MuiList-padding MuiMenu-list css-r8u8y9"][@role="listbox"]/li',{hasText:'New'}).click({ timeout: 60000 });
+        await millsApplyFilterBtn.click();
+        const millsTypeFilterResult = this.millsTypeFilterResult.first();
+        await expect(millsTypeFilterResult).toHaveText('New'); 
+        console.log("-------------Mills Filtered type result is displayed.-------------");
+
+        await millsReset_btn.click();
+
     }
 
     async verifyUpdateTMPlanID(tbpId) {
@@ -238,9 +287,101 @@ export default class TimeBoundPlanPage {
         const successToastmsg = this.successToastmessage;
         await successToastmsg.isVisible();
         console.log("-------------Success toast message displayed.-------------");
+    }
+
+    async verifyTheJustificationForChangesForSupplyBaseAfterUpdatingTBP(supplyBaseId: string, justificationSupplyBaseId: string, justificationSupplyBaseName: string) {
+        const supplyBaseSearchBar_txt = this.supplyBaseSearchBar_text
+        await supplyBaseSearchBar_txt.fill(supplyBaseId);
+        console.log("-------------Supply base ID " + supplyBaseId + " added.-------------");
+
+       const applyFilterBtn = this.applyFilterButton 
+       await applyFilterBtn.click();
+        const supplyJustificationFilterRslt = this.supplyJustificationFilterResult.first();
+        await supplyJustificationFilterRslt.click();
+        console.log("-------------Justification for Changes dialog displayed.-------------");
+
+        const justificationSupplyBaseIdTxt = this.justificationSupplyBaseIdText
+        await expect(justificationSupplyBaseIdTxt).toHaveText(justificationSupplyBaseId); 
+
+        const justificationSupplyBaseNameTxt = this.justificationSupplyBaseNameText
+        await expect(justificationSupplyBaseNameTxt).toHaveText(justificationSupplyBaseName);
+        console.log("-------------Supply Base name and ID displayed in the justification modal.-------------");
+
+        const justificationDialogClose_btn = this.justificationDialogClose_button
+        await justificationDialogClose_btn.click();
+        console.log("-------------Justification dialog is closed.-------------");
+    }
+
+    async verifyTheJustificationForChangesForMillsAfterUpdatingTBP(siteName: string, justificationSiteBusinessId: string, justificationPlanYear: string) {
+        const millsSearchBar_txt = this.millsSearchBar_text;
+        await millsSearchBar_txt.fill(siteName,{ timeout: 50000});
+        console.log("-------------Site name " + siteName + " added.-------------");
+
+        const millsApplyFilterBtn = this.millsApplyFilterButton;
+        await millsApplyFilterBtn.click();
+
+        const millsSiteNameFilterRslt = this.millsSiteNameFilterResult.first();
+        const millsJustificationFilterRslt = this.millsJustificationFilterResult.first();
+        await millsJustificationFilterRslt.click();
+        console.log("-------------Justification for Changes dialog displayed.-------------");
+
+        const justificationSiteBusinessIdTxt = this.justificationSiteBusinessIdText
+        await expect(justificationSiteBusinessIdTxt).toHaveText(justificationSiteBusinessId); 
+
+        const justificationPlanYearTxt = this.justificationPlanYearText
+        await expect(justificationPlanYearTxt).toHaveText(justificationPlanYear);
+        console.log("-------------Site Business Id and Plan Year are displayed in the justification modal.-------------");
+
+        const justificationDialogClose_btn = this.justificationDialogClose_button
+        await justificationDialogClose_btn.click();
+        console.log("-------------Justification dialog is closed.-------------");
+    }
+
+    async verifySearchForNonExistingSupplyBaseIDAndSupplyBaseName(nonExistSupplyBaseId: string,nonExistSupplyBaseName: string ) {
+        const supplyBaseSearchBar_txt = this.supplyBaseSearchBar_text
+        await supplyBaseSearchBar_txt.fill(nonExistSupplyBaseId);
+        console.log("-------------Supply base ID " + nonExistSupplyBaseId + " added.-------------");
+
+       const applyFilterBtn = this.applyFilterButton 
+       await applyFilterBtn.click();
+        const noDataAvailable_txt = this.noDataAvailable_text;
+        await expect(noDataAvailable_txt).toBeVisible; 
+        console.log("-------------No data available message displayed.-------------");
+
+        const supplyBaseReset_btn = this.supplyBaseReset_button
+        await supplyBaseReset_btn.click();
+
+        await supplyBaseSearchBar_txt.fill(nonExistSupplyBaseName)
+        console.log("-------------Supply base name " + nonExistSupplyBaseName + " added.-------------")
+
+        await applyFilterBtn.click({timeout : 20000});
+        await expect(noDataAvailable_txt).toBeVisible; 
+        console.log("-------------No data available message displayed.-------------");
+    }
+    async verifySearchForNonExistingSiteBusinessIDAndSiteName(nonExistSiteID: string,nonExistSiteName: string) {
+        const millsSearchBar_txt = this.millsSearchBar_text;
+        await millsSearchBar_txt.fill(nonExistSiteName,{ timeout: 50000});
+        console.log("-------------Site name " + nonExistSiteName + " added.-------------");
+
+        const millsApplyFilterBtn = this.millsApplyFilterButton;
+        await millsApplyFilterBtn.click();
+
+        const noDataAvailable_txt = this.noDataAvailable_text;
+        await expect(noDataAvailable_txt).toBeVisible; 
+        console.log("-------------No data available message displayed.-------------");
+
+        const millsReset_btn = this.millsReset_button
+        await millsReset_btn.click();
+
+        await millsSearchBar_txt.fill(nonExistSiteID,{ timeout: 50000});
+        console.log("-------------Site Business Id " + nonExistSiteID + " added.-------------");
+
+        await millsApplyFilterBtn.click();
+        await expect(noDataAvailable_txt).toBeVisible; 
+        console.log("-------------No data available message displayed.-------------");
+
 
     }
 
-    
 
 }

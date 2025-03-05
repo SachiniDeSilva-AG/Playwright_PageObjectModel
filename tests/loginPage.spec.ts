@@ -1,8 +1,7 @@
 import { test, expect } from "../base/myFixture";
-import DashboardPage from "../pages/dashboardPage";
 import credentials from "../testdata/loginData.json"
 
-test.describe(" Login test cases", async () => {
+test.describe("Login test cases for RSPO Member", async () => {
 
   test.beforeEach(async ({ basePage }) => {
     basePage.initialize();

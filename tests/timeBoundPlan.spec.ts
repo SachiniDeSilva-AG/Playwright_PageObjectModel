@@ -53,8 +53,8 @@ test.describe("Time Bound Plan verifications for RSPO Member", async () => {
         await timeBoundPlanPage.navigationForSupplyBasesTab_UnderSupplyBases();
         await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseName(timeBoundSearch.supplyBaseNameSearch);
         await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseName("Disclosure2");
-        await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseID(timeBoundSearch.supplyBaseIdSearch);
-        await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseID("SB25-015100");
+        await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseIDAndType(timeBoundSearch.supplyBaseIdSearch,timeBoundSearch.supplyTypeList);
+        await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseIDAndType("SB25-015100", "New");
 
       })
 
@@ -66,9 +66,45 @@ test.describe("Time Bound Plan verifications for RSPO Member", async () => {
         await timeBoundPlanPage.navigationForMillsTab_UnderTimeBoundPlan();
         await timeBoundPlanPage.verifyFilterSearchUsingSiteName(timeBoundSearch.siteNameSearch);
         await timeBoundPlanPage.verifyFilterSearchUsingSiteName("Mill 1 Audit POMS Sachini Go Live");
-        await timeBoundPlanPage.verifyFilterSearchUsingSiteId(timeBoundSearch.siteBusinessId);
-        await timeBoundPlanPage.verifyFilterSearchUsingSiteId("ML25-000360");
+        await timeBoundPlanPage.verifyFilterSearchUsingSiteIdAndType(timeBoundSearch.siteBusinessId, timeBoundSearch.millTypeList);
+        await timeBoundPlanPage.verifyFilterSearchUsingSiteIdAndType("ML25-000360", "New");
       })
 
+      test ('Verify the justification changes from Supply Base tab -> PQ-721', async({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+        await loginPage.userlogin(credentials.userName, credentials.passWord);
+        await dashboardPage.verifytheDashboardTitle("Dashboard");
+        await dashboardPage.navigatestoEntityModule();
+        await entityManagementModule.navigationToTimeBoundPlanPage();
+        await timeBoundPlanPage.navigationForSupplyBasesTab_UnderSupplyBases();
+        await timeBoundPlanPage.verifyFilterSearchUsingSupplyBaseIDAndType(timeBoundSearch.supplyBaseIdSearch,timeBoundSearch.supplyTypeList);
+        await timeBoundPlanPage.verifyTheJustificationForChangesForSupplyBaseAfterUpdatingTBP(timeBoundSearch.supplyBaseIdSearch,timeBoundSearch.justificationSupplyBaseId, timeBoundSearch.justificationSupplyBaseName);
+      })
 
+      test ('Verify the justification changes from Mills tab -> PQ-721', async({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+        await loginPage.userlogin(credentials.userName, credentials.passWord);
+        await dashboardPage.verifytheDashboardTitle("Dashboard");
+        await dashboardPage.navigatestoEntityModule();
+        await entityManagementModule.navigationToTimeBoundPlanPage();
+        await timeBoundPlanPage.navigationForMillsTab_UnderTimeBoundPlan();
+        await timeBoundPlanPage.verifyFilterSearchUsingSiteIdAndType(timeBoundSearch.siteBusinessId, timeBoundSearch.millTypeList);
+        await timeBoundPlanPage.verifyTheJustificationForChangesForMillsAfterUpdatingTBP(timeBoundSearch.siteBusinessId,timeBoundSearch.justificationSiteBusinessId, timeBoundSearch.justificationPlanYear);
+      })
+
+      test ('Verify the no data message in the supply base for non existing supply base id and name-> PQ-721', async({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+        await loginPage.userlogin(credentials.userName, credentials.passWord);
+        await dashboardPage.verifytheDashboardTitle("Dashboard");
+        await dashboardPage.navigatestoEntityModule();
+        await entityManagementModule.navigationToTimeBoundPlanPage();
+        await timeBoundPlanPage.navigationForSupplyBasesTab_UnderSupplyBases();
+        await timeBoundPlanPage.verifySearchForNonExistingSupplyBaseIDAndSupplyBaseName(timeBoundSearch.nonExistSupplyBaseId, timeBoundSearch.nonExistingSupplyBaseName);
+      })
+
+      test ('Verify the no data message in the mills for non existing site Business id and site name-> PQ-721', async({loginPage, dashboardPage, entityManagementModule, timeBoundPlanPage}) => {
+        await loginPage.userlogin(credentials.userName, credentials.passWord);
+        await dashboardPage.verifytheDashboardTitle("Dashboard");
+        await dashboardPage.navigatestoEntityModule();
+        await entityManagementModule.navigationToTimeBoundPlanPage();
+        await timeBoundPlanPage.navigationForSupplyBasesTab_UnderSupplyBases();
+        await timeBoundPlanPage.verifySearchForNonExistingSupplyBaseIDAndSupplyBaseName(timeBoundSearch.nonExistSieBusinessId, timeBoundSearch.nonExistingSiteName);
+      })
 } )

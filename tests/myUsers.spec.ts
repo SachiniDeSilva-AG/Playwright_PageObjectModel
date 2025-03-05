@@ -1,5 +1,4 @@
 import { test, expect } from "../base/myFixture";
-import dashboardPage from "../pages/dashboardPage";
 import credentials from "../testdata/loginData.json";
 import userSearch from "../testdata/userData.json"
 
