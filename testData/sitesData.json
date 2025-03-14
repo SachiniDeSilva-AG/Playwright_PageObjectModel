@@ -1,0 +1,19 @@
+{
+    "parentEntityName":"Sachini Go Live Pte Ltd",
+    "ownership" : "Sachini Go Live Pte Ltd",
+    "summary" : "Site Summary",
+    "siteName": "Site Name",
+    "country" : "Malaysia",
+    "siteAddressStreet" : "1 Pusat Taman Sri Dagang 138 Jln Masjid Bintulu",
+    "siteAddressUnitNo" : "138",
+    "siteAddressCity" : "Bintulu",
+    "siteAddressState" : "Sarawak",
+    "siteAddressZip" : "97000",
+    "siteAssociation" : "Independent Third Party",
+    "siteBusiness" : "Mill",
+    "latitude" : "1.5140",
+    "longitude" : "103.7574",
+    "millCapacity": "10.55"
+
+
+}

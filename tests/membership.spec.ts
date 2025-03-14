@@ -17,7 +17,7 @@ test.describe("Memberships page verifications for RSPO Member", async () => {
         await dashboardPage.navigatestoEntityModule();
         await userManagementPage.verifyUserManagementTitle("User management");
         await entityManagementModule.navigationToMembershipPage();
-        await membershipPage.verifyMembershipNo("Membership No 9-5638-24-000-00");
+        await membershipPage.verifyMembershipPage("Membership Details");
         await membershipPage.verifyTheMembershipCategory("ORDINARY");
         await membershipPage.verifyTheParentEntity("Sachini Go Live Pte Ltd");
         await membershipPage.verifyTheParentEntityId("9-5638-24-000-00");

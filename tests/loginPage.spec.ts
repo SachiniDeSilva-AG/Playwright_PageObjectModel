@@ -1,7 +1,7 @@
 import { test, expect } from "../base/myFixture";
 import credentials from "../testdata/loginData.json"
 
-test.describe("Login test cases for RSPO Member", async () => {
+test.describe.serial("Login test cases for RSPO Member", async () => {
 
   test.beforeEach(async ({ basePage }) => {
     basePage.initialize();
@@ -25,6 +25,14 @@ test.describe("Login test cases for RSPO Member", async () => {
 
     await loginPage.userlogin(credentials.invaliduserName, credentials.passWord)
     await loginPage.verifyErrorMessageTrigger("Invalid username or password.")
+
+  });
+
+  test('Member Logout successfully from the application', async ({ page, loginPage, dashboardPage }) => {
+
+    await loginPage.userlogin(credentials.userName, credentials.passWord);
+    await dashboardPage.verifytheDashboardTitle("Dashboard");
+    await loginPage.verifyTheLogout();
 
   });
 

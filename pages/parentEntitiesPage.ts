@@ -15,6 +15,17 @@ export default class ParentEntitiesPage {
     readonly mailingAddressZip_textBox: Locator;
     readonly saveChanges_button: Locator;
     readonly saveChangesSuccessAlert: Locator;
+    readonly billingAddressStreet_textBox: Locator;
+    readonly billingAddressUnitNo_textBox: Locator;
+    readonly billingAddressCity_textBox: Locator;
+    readonly billingAddressState_textBox: Locator;
+    readonly billingAddressZip_textBox: Locator;
+    readonly billingCountry_dropdown: Locator;
+    readonly billingCountry_list: Locator;
+    readonly taxNumber_text: Locator;
+    readonly billingPersonName_text: Locator;
+    readonly billingPersonEmail_text: Locator;
+    readonly successAlertClose_button: Locator;
   
 
     constructor(public page: Page) {
@@ -31,6 +42,17 @@ export default class ParentEntitiesPage {
         this.mailingAddressZip_textBox = page.locator('//input[@id="entityDetails.mailingAddress.zip"]');
         this.saveChanges_button = page.locator('//button[@data-testid="form-button-primary-Save changes"]');
         this.saveChangesSuccessAlert = page.locator('//*[@class="MuiAlert-message css-1xsto0d"]/text()');
+        this.billingAddressStreet_textBox = page.locator('//*[@id="entityDetails.billingAddress.street"]');
+        this.billingAddressUnitNo_textBox = page.locator('//input[@id="entityDetails.billingAddress.unitNo"]');
+        this.billingAddressCity_textBox = page.locator('//input[@id="entityDetails.billingAddress.city"]');
+        this.billingAddressState_textBox = page.locator('//input[@id="entityDetails.billingAddress.stateProvince"]');
+        this.billingAddressZip_textBox = page.locator('//input[@id="entityDetails.billingAddress.zip"]');
+        this.billingCountry_dropdown = page.locator('//div[@id="entityDetails.billingCountry"]');
+        this.billingCountry_list = page.locator('//ul[@class="MuiList-root MuiList-padding MuiMenu-list css-r8u8y9"]/li');
+        this.taxNumber_text = page.locator('//input[@id="entityDetails.tin"]');
+        this.billingPersonName_text = page.locator('//input[@id="billingContactPerson.name"]');
+        this.billingPersonEmail_text = page.locator('//input[@id="billingContactPerson.email"]');
+        this.successAlertClose_button = page.locator('//button[@data-testid="feedback-message-close"]');
 
     }
 
@@ -93,5 +115,71 @@ export default class ParentEntitiesPage {
         const saveChangesSuccessMsg = this.saveChangesSuccessAlert;
         await saveChangesSuccessMsg.isVisible();
         console.log("-------------Success message is displayed.-----------");
+
+        await this.successAlertClose_button.click();
     }
+
+    async verifyUpdatingOfTheBillingAddress(billingAddressStreet: string, billingAddressUnitNo: string, bilingAddressCity: string, bilingAddressState: string, billingAddressZip: string) {
+        const billingAddressStreet_txt = this.billingAddressStreet_textBox
+        await billingAddressStreet_txt. clear();
+        await billingAddressStreet_txt.fill(billingAddressStreet);
+
+        const billingAddressUnitNo_txt = this.billingAddressUnitNo_textBox
+        await billingAddressUnitNo_txt.clear();
+        await billingAddressUnitNo_txt.fill(billingAddressUnitNo);
+
+        const billingAddressCity_txt = this.billingAddressCity_textBox
+        await billingAddressCity_txt.clear();
+        await billingAddressCity_txt.fill(bilingAddressCity);
+
+        const billingAddressState_txt = this.billingAddressState_textBox
+        await billingAddressState_txt.clear();
+        await billingAddressState_txt.fill(bilingAddressState);
+
+        const billingAddressZip_txt = this.billingAddressZip_textBox
+        await billingAddressZip_txt.clear();
+        await billingAddressZip_txt.fill(billingAddressZip);
+        console.log("-------------Enter Billing street, UnitNo, City, State, Zip.-----------");
+
+        const saveChanges_btn = this.saveChanges_button;
+        await saveChanges_btn.scrollIntoViewIfNeeded();
+        await saveChanges_btn.click();
+
+        const saveChangesSuccessMsg = this.saveChangesSuccessAlert;
+        await saveChangesSuccessMsg.isVisible();
+        console.log("-------------Success message is displayed.-----------");
+        await this.successAlertClose_button.click();
+    }
+
+    async verifyUpdatingBillingCountry(billingCountry: string) {
+        const billingCountrydrp = this.billingCountry_dropdown;
+        await billingCountrydrp.click();
+        await this.page.waitForSelector("//ul[@role='listbox']");
+
+        const countryOption = this.page.locator(`li[role='option'] >> text=${billingCountry}`);
+        await countryOption.click();
+
+        console.log(`-------------Selected billing country:${billingCountry}-------------`);
+    }
+        async verifyUpdatingTaxAndBillingPerson(taxNumber: string, billingPersonName: string, bilingPersonEmail: string) {
+        const taxNumber_txt = this.taxNumber_text
+        await taxNumber_txt.fill(taxNumber);
+
+        const billingPersonName_txt = this.billingPersonName_text
+        await billingPersonName_txt.fill(billingPersonName);
+
+        const billingPersonEmail_txt = this.billingPersonEmail_text
+        await billingPersonEmail_txt.fill(bilingPersonEmail);
+
+        const saveChanges_btn = this.saveChanges_button;
+        await saveChanges_btn.scrollIntoViewIfNeeded();
+        await saveChanges_btn.click();
+
+        const saveChangesSuccessMsg = this.saveChangesSuccessAlert;
+        await saveChangesSuccessMsg.isVisible();
+        console.log("-------------Success message is displayed.-----------");
+        await this.successAlertClose_button.click();
+      
+    }
+
 }

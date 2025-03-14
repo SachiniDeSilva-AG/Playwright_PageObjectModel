@@ -11,7 +11,7 @@ export default class MembershipPage {
 
 
     constructor(public page: Page) {
-     this.membership_title = page.locator('//*[@id="page-id"]//h1[contains(text(),"Membership No")]');
+     this.membership_title = page.locator('//*[@id="page-id"]//h1[text()]');
      this.parent_entity_label= page.locator('//*[@id="page-id"]//div[@data-testid="item-groupEntityName"]/div/p');
      this.prisma_parent_entity_id_label = page.locator('//*[@id="page-id"]//div[@data-testid="item-groupEntityId"]/div/p');
      this.membershipCategory_text = page.locator('//*[@id="page-id"]//div/h6[text()="Membership Category"]/following-sibling::p');
@@ -19,7 +19,7 @@ export default class MembershipPage {
 
     }
 
-    async verifyMembershipNo(membershiptxt: string) {
+    async verifyMembershipPage(membershiptxt: string) {
         const membership_ttl = this.membership_title
         await expect(membership_ttl).toHaveText(membershiptxt, { timeout: 50000 })
         console.log("-------------Membership page loaded.-----------")

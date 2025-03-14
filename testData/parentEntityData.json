@@ -8,7 +8,16 @@
     "mailingAddressUnitNo" : "16-11",
     "mailingAddressCity" : "Singapore",
     "mailingAddressState" : "East coast",
-    "mailingAddressZip" : "199597"
+    "mailingAddressZip" : "199597",
+    "billingAddressStreet" : "4 Shenton Way",
+    "billingAddressUnitNo" : "27-02",
+    "billingAddressCity" : "Singapore",
+    "billingAddressState" : "Middle",
+    "billingAddressZip" : "068807",
+    "billingCountry" : "Singapore",
+    "taxNumber" : "123SH567",
+    "billingPersonName" : "Test Billing Person",
+    "billingPersonEmail" : "testbilling123@gmail.com"
 
 
 }

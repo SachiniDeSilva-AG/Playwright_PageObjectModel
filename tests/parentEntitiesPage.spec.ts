@@ -18,22 +18,12 @@ test('Verify the Parent Entity Details under General Information -> PQ-1190', as
   await userManagementPage.verifyUserManagementTitle("User management");
   await entityManagementModule.navigationToParentEntitiesPage();
   await parentEntitiesPage.verifyParentEntitiesDetails_UnderGeneralInformation(parentEntityData.parentEntityName, parentEntityData.parentEntityID, parentEntityData.membershipNo, parentEntityData.parentEntityType);
-});
-
-test('Verify the update of remaining details under the general informtion tab', async ({loginPage , dashboardPage, userManagementPage,entityManagementModule, parentEntitiesPage}) => {
-  await loginPage.userlogin(credentials.userName, credentials.passWord);
-  await dashboardPage.verifytheDashboardTitle("Dashboard");
-  await dashboardPage.navigatestoEntityModule();
-  await userManagementPage.verifyUserManagementTitle("User management");
-  await entityManagementModule.navigationToParentEntitiesPage();
   await parentEntitiesPage.verifyUpdatingOfTheSstRegistrationNumberAndMailingAddress(parentEntityData.sstRegistrationNo,parentEntityData.mailingAddressStreet, parentEntityData.mailingAddressUnitNo, parentEntityData.mailingAddressCity, parentEntityData.mailingAddressState, parentEntityData.mailingAddressZip);
+  await parentEntitiesPage.verifyUpdatingOfTheBillingAddress(parentEntityData.billingAddressStreet, parentEntityData.billingAddressUnitNo, parentEntityData.billingAddressCity, parentEntityData.billingAddressState, parentEntityData.billingAddressZip);
+  await parentEntitiesPage.verifyUpdatingBillingCountry(parentEntityData.billingCountry);
+  await parentEntitiesPage.verifyUpdatingTaxAndBillingPerson(parentEntityData.taxNumber, parentEntityData.billingPersonName, parentEntityData.billingPersonEmail);
+
 });
-
-
-
-      
-
-
 
 })
 
