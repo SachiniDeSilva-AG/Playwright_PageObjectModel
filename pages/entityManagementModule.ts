@@ -4,12 +4,15 @@ export default class EntityManagementModule {
     readonly left_listcontainer: Locator;
     readonly assetExpanded_button: Locator;
     readonly sites: Locator;
+    readonly supplyBases : Locator;
 
     constructor(public page: Page) {
 
         this.left_listcontainer = page.locator('//*[@id="side-nav-layout"]//ul[@data-testid="list-container"]');
         this.assetExpanded_button = page.locator('//*[@id="side-nav-layout"]//div[@class="MuiButtonBase-root MuiAccordionSummary-root Mui-expanded css-4gz52r"][@aria-expanded="true"]');
-        this.sites = page.locator('//*[@id="side-nav-layout"]//div[@class="MuiButtonBase-root MuiAccordionSummary-root Mui-expanded css-4gz52r"][@aria-expanded="true"]/following-sibling::div//h6[text()="Sites"]')
+        this.sites = page.locator('//*[@id="side-nav-layout"]//div[@class="MuiButtonBase-root MuiAccordionSummary-root Mui-expanded css-4gz52r"][@aria-expanded="true"]/following-sibling::div//h6[text()="Sites"]');
+        this.supplyBases = page.locator('//*[@id="side-nav-layout"]//div[@class="MuiButtonBase-root MuiAccordionSummary-root Mui-expanded css-4gz52r"][@aria-expanded="true"]/following-sibling::div//h6[text()="Supply Bases"]');
+
 
 
     }
@@ -58,10 +61,23 @@ export default class EntityManagementModule {
         //const site = assetExpanded_btn.locator('/following-sibling::div//h6[text()="Sites"]'); 
         await site_btn.click();
         console.log("-------------Site page is loaded.-----------");
+    }
+    async navigationToSupplyBasePage( ) {
+        const assetExpanded_btn = this.assetExpanded_button;
+        const isExpanded = await assetExpanded_btn.count() > 0;
+        const supplyBases_btn = this.supplyBases
 
-
-        // const sitesTtl = this.sitesTitle
-        // await expect(sitesTtl.isVisible());
-        // console.log("-------------Assets option loaded.-----------");
+        if(isExpanded){
+            await supplyBases_btn.click();
+            console.log("-------------Supply Bases page is loaded.-----------");
+        }
+        else{
+            const assetOption = this.page.locator('//*[@id="side-nav-layout"]//h6[text()="Assets"]');
+            await assetOption.click();
+        }
+        await assetExpanded_btn.waitFor({ state: 'visible' });
+        //const site = assetExpanded_btn.locator('/following-sibling::div//h6[text()="Sites"]'); 
+        await supplyBases_btn.click();
+        console.log("-------------Supply Bases page is loaded.-----------");
     }
 }

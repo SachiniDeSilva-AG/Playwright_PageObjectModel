@@ -8,6 +8,7 @@ import TimeBoundPlanPage from "../pages/timeBoundPage";
 import ParentEntitiesPage from "../pages/parentEntitiesPage";
 import BasePage from "../pages/basePage";
 import SitesPage from "../pages/sitesPage";
+import SupplyBasesPage from "../pages/supplyBasesPage";
 
 
 type pages = {
@@ -20,6 +21,7 @@ type pages = {
     parentEntitiesPage : ParentEntitiesPage;
     basePage: BasePage;
     sitesPage : SitesPage;
+    supplyBasesPage: SupplyBasesPage;
 }
 
 const testPages = base.extend<pages>({
@@ -50,6 +52,9 @@ const testPages = base.extend<pages>({
     },
     sitesPage : async({page}, use) => {
         await use(new SitesPage(page))
+    },
+    supplyBasesPage : async({page}, use) => {
+        await use(new SupplyBasesPage(page))
     },
 
 })

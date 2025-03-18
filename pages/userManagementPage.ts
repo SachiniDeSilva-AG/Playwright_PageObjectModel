@@ -96,7 +96,7 @@ export default class UserManagementPage {
     async verifyFilterSearchUsingPrismaId(userId: string) {
         const searchBar_txt = this.searchBar_text
         await searchBar_txt.fill(userId);
-        console.log("-------------User name " + userId + " added.-------------")
+        console.log("-------------User ID " + userId + " added.-------------")
         await this.apply_btn.click();
         const applyfilter = this.apply_btn
         await this.apply_btn.click();
@@ -106,7 +106,6 @@ export default class UserManagementPage {
         console.log("-------------Filtered userId displayed.-------------")
         const resetbtn = this.reset_btn
         await resetbtn.click();
-
     }
 
     async verifyFilterSearchUsingFullName(fullname: string) {
