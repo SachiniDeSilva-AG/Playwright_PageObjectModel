@@ -57,6 +57,7 @@ export default class SitesPage {
     readonly expandedBusinessTypes: Locator;
     readonly expandedCoordinates: Locator;
     readonly tableName: Locator;
+    readonly ownershipOpen_button : Locator;
 
     constructor(public page: Page) {
 
@@ -107,10 +108,11 @@ export default class SitesPage {
         this.editSiteBusiness_button = page.locator('//button[@data-testid="edit-icon-0"]');
         this.parentEntity_search = page.locator('//*[@id="page-id"]//div[@data-testid="filterSection"]//div[@data-testid="filterEntity-container"]');
         this.legalEntity_search = page.locator('//*[@id="page-id"]//div[@data-testid="filterSection"]//div[@data-testid="combobox-filterLegalEntity"]//input');
-        this.filterResults = page.locator('//*[@id="page-id"]/div[1]/div[2]//div[@data-id]');
+        this.filterResults = page.locator('//div[@role="rowgroup"]//div[@title="Test Site"]');
         this.expandToggle = page.locator('//*[@id="page-id"]//div[@data-field="__detail_panel_toggle__"]/button');
         this.expandedBusinessTypes = page.locator('//*[@id="page-id"]//h6[text()="Business Types"]');
-        this.tableName = page.locator('MuiTable-root MuiTable-stickyHeader css-1cxtntg')
+        this.tableName = page.locator('MuiTable-root MuiTable-stickyHeader css-1cxtntg');
+        this.ownershipOpen_button = page.locator('//*[@id="filterSection-flex-container"]//div/button[@title="Open"]');
     }
 
     async clickOnNewSite() {
@@ -268,9 +270,8 @@ export default class SitesPage {
         const sitesSearchBar_txt = this.sitesSearchBar
         await sitesSearchBar_txt.fill(siteId);
         console.log("-------------Site ID " + siteId + " added.-------------");
-        await this.applyFilters.click();
-        const applyFilters_btn = this.applyFilters
-        await applyFilters_btn.click();
+    }
+    async verifySiteFilter (){
         const siteResult_lst = this.siteResult
         await expect(siteResult_lst).toBeVisible();
         console.log("-------------Filtered Site Id displayed.-------------");
@@ -386,17 +387,16 @@ export default class SitesPage {
         const legalEntity_srch = this.legalEntity_search
         await legalEntity_srch.click();
         await legalEntity_srch.fill(legalEntityName);
-        await this.page.waitForSelector("//ul[@role='listbox']");
-        const legalEntityOption = this.page.locator(`li[role='combox'] >> text=${legalEntityName}`);
-        await this.page.locator('//*[@id="combobox-filterLegalEntity-option-1"]').waitFor({ state: 'visible' });
-        await this.page.locator('//*[@id="combobox-filterLegalEntity-option-1"]').check();
-        await this.applyFilters.click();
-        console.log(`------------Legal Entity: ${legalEntityName} selected.------------`);
+        await this.page.click("//ul[@role='listbox']/li/div[contains(text(),'Sachini group 1')]");
+        await legalEntity_srch.click();
+        console.log(`------------Legal Entity: ${legalEntityName} selected.------------`);  
     }
     async applyFilter() {
         await this.applyFilters.click();
         const applyFilters_btn = this.applyFilters
         await applyFilters_btn.click();
+    }
+    async verifyFilterByLegalAndParentEntities() {
         const filterRslts = this.filterResults
         await expect(filterRslts).toBeVisible();
         console.log("-------------Filtered Result displayed.-------------");
@@ -407,7 +407,7 @@ export default class SitesPage {
         await expect(this.expandedBusinessTypes).toBeVisible();
         await expect(this.expandedCoordinates).toBeVisible();
     }
-    async verifyDataInTheSiteTable (){
+    async verifyDataInTheSiteTable (){ // change this expected values
         const tableName = this.tableName
         const headers = tableName.locator("thead");
         console.log(await headers.allTextContents());

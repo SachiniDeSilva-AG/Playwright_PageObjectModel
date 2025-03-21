@@ -1,9 +1,5 @@
 import { test, expect } from "../base/myFixture";
-import dashboardPage from "../pages/dashboardPage";
-import ParentEntitiesPage from "../pages/parentEntitiesPage";
 import credentials from "../testdata/loginData.json";
-import timeBoundSearch from "../testdata/timeBoundData.json";
-import parentEntityData from "../testData/parentEntityData.json";
 import sitesData from "../testData/sitesData.json";
 
 test.describe("Sites page verifications for RSPO Member", async () => {
@@ -311,6 +307,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.searchBySiteID(sitesData.siteID);
+    await sitesPage.applyFilter();
+    await sitesPage.verifySiteFilter();
     await sitesPage.clickOnFilteredResult();    
     await sitesPage.updateSiteName(sitesData.updateSiteName);
     await sitesPage.updateSiteSummary(sitesData.updateSummary);
@@ -343,6 +341,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     // await sitesPage.siteBusinessAdd();
     // await sitesPage.verifyTheAddedBusiness();
     await sitesPage.searchBySiteID(sitesData.siteID);
+    await sitesPage.applyFilter();
+    await sitesPage.verifySiteFilter();
     await sitesPage.clickOnFilteredResult();   
     await sitesPage.navigationForSiteBusinessTab_UnderSiteDetails();
     await sitesPage.addNewSiteBusiness();
@@ -375,6 +375,7 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await sitesPage.searchByParentEntity(sitesData.parentEntity);
     await sitesPage.searchByLegalEntity(sitesData.legalEntity);
     await sitesPage.applyFilter();
+    await sitesPage.verifyFilterByLegalAndParentEntities();
   });
   test('Expand Site Name -> PQ-351', async ({loginPage , dashboardPage, userManagementPage,entityManagementModule, sitesPage}) => {
     await loginPage.userlogin(credentials.userName, credentials.passWord);
@@ -385,10 +386,11 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await sitesPage.searchByParentEntity(sitesData.parentEntity);
     await sitesPage.searchByLegalEntity(sitesData.legalEntity);
     await sitesPage.applyFilter();
+    await sitesPage.verifyFilterByLegalAndParentEntities();
     await sitesPage.expandTheToggleOfSiteName();
-    await sitesPage.verifyDataInTheSiteTable();
+    await sitesPage.verifyDataInTheSiteTable(); // verify the expected results
     
-      });
+  });
   
 
 

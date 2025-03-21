@@ -18,6 +18,7 @@ export default defineConfig({
   expect: {
     timeout: 300000,
   },
+  
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -36,10 +37,12 @@ export default defineConfig({
     viewport: { width: 1280, height: 720 },
     actionTimeout: 500000,
     navigationTimeout: 3000000,
+    screenshot: 'only-on-failure',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
+
 
   /* Configure projects for major browsers */
   projects: [
@@ -47,6 +50,7 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    
 
     /* Test against mobile viewports. */
     // {

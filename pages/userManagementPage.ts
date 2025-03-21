@@ -66,11 +66,7 @@ export default class UserManagementPage {
         this.dialogStayOnThePage = page.locator('//div/button[text()="Stay on this page"]');
         this.dialogBack_button = page.locator('//button[text()="Back"]');
         this.addExistingNoResults_text= page.locator('//div/p[@data-testid="typography-body2"][text()]');
-
-
     }
-
-
 
     async verifyUserManagementTitle(usermanagement_text: string) {
         const usermanagement_ttl = this.usermanagement_text
