@@ -101,5 +101,4 @@ test('Verify the filteration using parent entity and legal entity ', async ({log
     await smallholdersPage.clickBackFromSecondStep();
     await smallholdersPage.clickCancelFromFirstStep();
   })
-
 })

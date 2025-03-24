@@ -6,6 +6,7 @@ export default class EntityManagementModule {
     readonly sites: Locator;
     readonly supplyBases : Locator;
     readonly smallholders : Locator;
+    readonly managementUnit : Locator;
 
     constructor(public page: Page) {
 
@@ -14,6 +15,7 @@ export default class EntityManagementModule {
         this.sites = page.locator('//*[@id="side-nav-layout"]//div[@class="MuiButtonBase-root MuiAccordionSummary-root Mui-expanded css-4gz52r"][@aria-expanded="true"]/following-sibling::div//h6[text()="Sites"]');
         this.supplyBases = page.locator('//*[@id="side-nav-layout"]//div[@class="MuiButtonBase-root MuiAccordionSummary-root Mui-expanded css-4gz52r"][@aria-expanded="true"]/following-sibling::div//h6[text()="Supply Bases"]');
         this.smallholders = page.locator('//*[@id="side-nav-layout"]//div[@class="MuiButtonBase-root MuiAccordionSummary-root Mui-expanded css-4gz52r"][@aria-expanded="true"]/following-sibling::div//h6[text()="Smallholders"]');
+        this.managementUnit = page.locator('//*[@id="side-nav-layout"]//div[@class="MuiButtonBase-root MuiAccordionSummary-root Mui-expanded css-4gz52r"][@aria-expanded="true"]/following-sibling::div//h6[text()=""]');
     }
 
     async navigationToMembershipPage( ) {
@@ -97,4 +99,10 @@ export default class EntityManagementModule {
         await smallholders_btn.click();
         console.log("-------------Small holder page is loaded.-----------");
     }
+    async navigationToManagementUnitPage( ) {
+            const listcontainermembership = this.left_listcontainer
+            const itemToClick = listcontainermembership.locator('//h6[text()="Management Units"]'); 
+            await itemToClick.click();
+            console.log("-------------Management Units page loaded.-----------");
+        }
 }

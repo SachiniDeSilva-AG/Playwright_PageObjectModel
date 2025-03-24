@@ -22,8 +22,6 @@ test('Verify the Parent Entity Details under General Information -> PQ-1190', as
   await parentEntitiesPage.verifyUpdatingOfTheBillingAddress(parentEntityData.billingAddressStreet, parentEntityData.billingAddressUnitNo, parentEntityData.billingAddressCity, parentEntityData.billingAddressState, parentEntityData.billingAddressZip);
   await parentEntitiesPage.verifyUpdatingBillingCountry(parentEntityData.billingCountry);
   await parentEntitiesPage.verifyUpdatingTaxAndBillingPerson(parentEntityData.taxNumber, parentEntityData.billingPersonName, parentEntityData.billingPersonEmail);
-
 });
 
 })
-
