@@ -49,5 +49,12 @@
     "updateMillCapacity": "20.11",
     "siteNameSearch" : "Site Automation Edit",
     "parentEntity" : "Sachini Go Live Pte Ltd",
-    "legalEntity" : "Sachini group 1"
+    "legalEntity" : "Sachini group 1",
+    "searchSiteID" : "S25-022096",
+     "expectedTable": [
+          ["MILL", "40.7128, -74.006"],
+          ["CRUSHER", "40.7128, -74.006"]
+        ]
+      
+
 }

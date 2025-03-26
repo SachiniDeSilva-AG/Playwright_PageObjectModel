@@ -56,7 +56,7 @@ export default class SitesPage {
     readonly expandToggle: Locator;
     readonly expandedBusinessTypes: Locator;
     readonly expandedCoordinates: Locator;
-    readonly tableName: Locator;
+    readonly firstCellValue  : Locator;
     readonly ownershipOpen_button : Locator;
 
     constructor(public page: Page) {
@@ -110,8 +110,9 @@ export default class SitesPage {
         this.legalEntity_search = page.locator('//*[@id="page-id"]//div[@data-testid="filterSection"]//div[@data-testid="combobox-filterLegalEntity"]//input');
         this.filterResults = page.locator('//div[@role="rowgroup"]//div[@title="Test Site"]');
         this.expandToggle = page.locator('//*[@id="page-id"]//div[@data-field="__detail_panel_toggle__"]/button');
-        this.expandedBusinessTypes = page.locator('//*[@id="page-id"]//h6[text()="Business Types"]');
-        this.tableName = page.locator('MuiTable-root MuiTable-stickyHeader css-1cxtntg');
+        this.expandedBusinessTypes = page.locator('//div[@id="page-id"]//h6[text()="Business Types"]');
+        this.expandedCoordinates = page.locator('//div[@id="page-id"]//h6[text()="Coordinates (Lat, Long)"]');
+        this.firstCellValue = page.locator('//table/tbody/tr[1]/td[text()="MILL"]');  //await page.locator('table tbody tr:nth-child(2) td:nth-child(3)').textContent();
         this.ownershipOpen_button = page.locator('//*[@id="filterSection-flex-container"]//div/button[@title="Open"]');
     }
 
@@ -120,7 +121,7 @@ export default class SitesPage {
         await newSite_btn.click().then();
         console.log(`-------------Create New Site page is loaded.-----------`);
     }
-    async selectParentEntityAndOwnership(parentEntityName: string, ownership: string) {
+    async selectParentEntity(parentEntityName: string) {
         const parentEntity_drpdwn = this.parentEntity_dropdown
         await parentEntity_drpdwn.click();
         await this.page.waitForSelector("//ul[@role='listbox']");
@@ -128,7 +129,8 @@ export default class SitesPage {
         const parentEntityOption = this.page.locator(`li[role='option'] >> text=${parentEntityName}`);
         await parentEntityOption.click();
         console.log(`------------Legal Entity Selected:${parentEntityName}-------------`);
-
+    }
+    async selectOwnership(ownership: string) {
         const ownership_drpdwn = this.legalEntity_dropdown
         await ownership_drpdwn.click();
         await this.page.waitForSelector("//ul[@role='listbox']");
@@ -137,7 +139,6 @@ export default class SitesPage {
         await ownershipOption.click();
         console.log(`------------Legal Entity Selected:${ownership}-------------`);
     }
-
     async navigatesToNextPage() {
         const sitesNext_btn = this.sitesNext
         await sitesNext_btn.click();
@@ -332,7 +333,9 @@ export default class SitesPage {
     async saveUpdatedChanges() {
         const siteSaveChanges = this.saveChanges_button
         await siteSaveChanges.click();
-
+        console.log('------------Clicked on Save button.------------');
+    }
+    async verifySavedAlert(){
         const feedbackMsg = this.feedbackMessage
         await feedbackMsg.isVisible();
         console.log('------------New changes saved message displayed.------------');
@@ -368,9 +371,8 @@ export default class SitesPage {
         const sitesSearchBar_txt = this.sitesSearchBar
         await sitesSearchBar_txt.fill(siteNameSearch);
         console.log("-------------Site Name " + siteNameSearch + " added.-------------");
-        await this.applyFilters.click();
-        const applyFilters_btn = this.applyFilters
-        await applyFilters_btn.click();
+    }
+    async verifyTheFilteredSiteName() {
         const siteResult_lst = this.siteResult
         await expect(siteResult_lst).toBeVisible();
         console.log("-------------Filtered Site Name displayed.-------------");
@@ -404,35 +406,25 @@ export default class SitesPage {
     async expandTheToggleOfSiteName() {
         const expandToggle_btn = this.expandToggle
         await expandToggle_btn.click();
-        await expect(this.expandedBusinessTypes).toBeVisible();
-        await expect(this.expandedCoordinates).toBeVisible();
+        const expandedBusinessTypes_tb = this.expandedBusinessTypes
+        await expect(expandedBusinessTypes_tb).toBeVisible({ timeout: 5000 });
+        const expandedCoordinates_tb = this.expandedCoordinates
+        await expect(expandedCoordinates_tb).toBeVisible({ timeout: 5000 });
+        console.log("-------------Site details expanded.-------------");
     }
-    async verifyDataInTheSiteTable (){ // change this expected values
-        const tableName = this.tableName
-        const headers = tableName.locator("thead");
-        console.log(await headers.allTextContents());
-
-        const rows = tableName.locator("tbody tr");
-        console.log("Rows count:" + await rows.count());
-        const cols = rows.first().locator("td");
-        console.log("Cols count:" + await cols.count());
-
-        const expectedData = [
-            { type: 'MILL', coordinates: '40.7128, -74.006' },
-            { type: 'CRUSHER', coordinates: '40.7128, -74.006' }
-          ];
-
-          for (const data of expectedData) {
-            const row = rows.locator(`text=${data.type}`);
-            await expect(row).toContainText(data.coordinates);
-          }
-
-
-
-        
-        
-
+    async verifyTableValues(expectedTable: string[][]): Promise<void> {
+        const rows = this.page.locator("//div//table/tbody/tr");
+        const rowCount = await rows.count();
+    
+        for (let i = 0; i < rowCount; i++) {
+            const columns = rows.nth(i).locator("td");
+            const colCount = await columns.count();
+    
+            for (let j = 0; j < colCount; j++) {
+                const cellText = (await columns.nth(j).textContent())?.trim();
+                expect(cellText).toBe(expectedTable[i][j]);
+                console.log("-------------Business Types and Coordinates are displying correctly.-------------");
+            }
+        }
     }
-
-
 }

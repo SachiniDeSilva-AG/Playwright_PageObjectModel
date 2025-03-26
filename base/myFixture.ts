@@ -11,6 +11,7 @@ import SitesPage from "../pages/sitesPage";
 import SupplyBasePage from "../pages/supplyBasePage";
 import SmallHoldersPage from "../pages/smallholdersPage";
 import ManagementUnitPage from "../pages/managementUnitPage";
+import DisclosureGrowerPage from "../pages/disclosureGrowerPage";
 
 
 type pages = {
@@ -26,6 +27,7 @@ type pages = {
     supplyBasePage: SupplyBasePage;
     smallholdersPage: SmallHoldersPage;
     managementUnitPage: ManagementUnitPage;
+    disclosureGrowerPage : DisclosureGrowerPage
 }
 
 const testPages = base.extend<pages>({
@@ -65,6 +67,9 @@ const testPages = base.extend<pages>({
     },
     managementUnitPage : async({page}, use) => {
         await use(new ManagementUnitPage(page))
+    },
+    disclosureGrowerPage : async({page}, use) => {
+        await use(new DisclosureGrowerPage(page))
     },
 
 })

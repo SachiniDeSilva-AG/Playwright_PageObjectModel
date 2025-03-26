@@ -18,10 +18,19 @@ test('Verify the Parent Entity Details under General Information -> PQ-1190', as
   await userManagementPage.verifyUserManagementTitle("User management");
   await entityManagementModule.navigationToParentEntitiesPage();
   await parentEntitiesPage.verifyParentEntitiesDetails_UnderGeneralInformation(parentEntityData.parentEntityName, parentEntityData.parentEntityID, parentEntityData.membershipNo, parentEntityData.parentEntityType);
-  await parentEntitiesPage.verifyUpdatingOfTheSstRegistrationNumberAndMailingAddress(parentEntityData.sstRegistrationNo,parentEntityData.mailingAddressStreet, parentEntityData.mailingAddressUnitNo, parentEntityData.mailingAddressCity, parentEntityData.mailingAddressState, parentEntityData.mailingAddressZip);
+  await parentEntitiesPage.verifyTheUpdateOfTheSstRegistrationNumber(parentEntityData.sstRegistrationNo);
+  await parentEntitiesPage.verifyTheUpdateOfTheMailingAddress(parentEntityData.mailingAddressStreet, parentEntityData.mailingAddressUnitNo, parentEntityData.mailingAddressCity, parentEntityData.mailingAddressState, parentEntityData.mailingAddressZip);
+  await parentEntitiesPage.verifySavingTheUpdatedChanges();
+  await parentEntitiesPage.verifyTheSuccessAlert();
   await parentEntitiesPage.verifyUpdatingOfTheBillingAddress(parentEntityData.billingAddressStreet, parentEntityData.billingAddressUnitNo, parentEntityData.billingAddressCity, parentEntityData.billingAddressState, parentEntityData.billingAddressZip);
+  await parentEntitiesPage.verifySavingTheUpdatedChanges();
+  await parentEntitiesPage.verifyTheSuccessAlert();
   await parentEntitiesPage.verifyUpdatingBillingCountry(parentEntityData.billingCountry);
-  await parentEntitiesPage.verifyUpdatingTaxAndBillingPerson(parentEntityData.taxNumber, parentEntityData.billingPersonName, parentEntityData.billingPersonEmail);
+  await parentEntitiesPage.verifyUpdatingTaxNumber(parentEntityData.taxNumber);
+  await parentEntitiesPage.verifyUpdatingTheBillingPersonName(parentEntityData.billingPersonName);
+  await parentEntitiesPage.verifyUpdatingTheBillingPersonEmail (parentEntityData.billingPersonEmail);
+  await parentEntitiesPage.verifySavingTheUpdatedChanges();
+  await parentEntitiesPage.verifyTheSuccessAlert();
 });
 
 })

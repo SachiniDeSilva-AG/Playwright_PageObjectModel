@@ -1,4 +1,13 @@
 {
-    "" : ""
+    "parentEntityName" : "Sachini Go Live Pte Ltd",
+    "legalEntityName" : "Sachini Go Live Pte Ltd",
+    "managementUnitName" : "MU Automation",
+    "muAddressStreet" : "15 Lor 34 Geylang",
+    "muAddressUnitNo" : "34",
+    "muAddressCity" : "Geylang",
+    "muAddressState" : "Geylang",
+    "muAddressZip" : "398212",
+    "supplyBaseSearch1" : "SB25-015100",
+    "supplyBaseSearch2": "SB25-015131"
     
 }

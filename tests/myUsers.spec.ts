@@ -19,12 +19,18 @@ test.describe("User Management page verifications for RSPO Member", async () => 
     await loginPage.userlogin(credentials.userName, credentials.passWord)
     await dashboardPage.verifytheDashboardTitle("Dashboard")
     await dashboardPage.navigatestoEntityModule()
-    await userManagementPage.verifyFilterSearchUsingEmail(userSearch.emailSearch)
-    await userManagementPage.verifyFilterSearchUsingEmail("qatstprisma+golivesachini@gmail.com");
-    await userManagementPage.verifyFilterSearchUsingPrismaId(userSearch.prismaIdSearch)
-    await userManagementPage.verifyFilterSearchUsingPrismaId("U25-1875384")
-    await userManagementPage.verifyFilterSearchUsingFullName(userSearch.nameSearch)
-    await userManagementPage.verifyFilterSearchUsingFullName("Sachini_golive deSilva")
+    await userManagementPage.verifyFilterSearchUsingEmail(userSearch.emailSearch);
+    await userManagementPage.applyFilter();
+    await userManagementPage.verifyFilterResultsForUserEmail();
+    await userManagementPage.applyReset();
+    await userManagementPage.verifyFilterSearchUsingPrismaId(userSearch.prismaIdSearch);
+    await userManagementPage.applyFilter();
+    await userManagementPage.verifyFilterResultsForPrismaId();
+    await userManagementPage.applyReset();
+    await userManagementPage.verifyFilterSearchUsingFullName(userSearch.nameSearch);
+    await userManagementPage.applyFilter();
+    await userManagementPage.verifyFilterResultsForFullName();
+    await userManagementPage.applyReset();
   });
 
   test('Verify adding the existing user by email -> PQ-1179', async ({ loginPage, userManagementPage, dashboardPage }) => {

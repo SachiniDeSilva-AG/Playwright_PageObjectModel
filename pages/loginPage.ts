@@ -10,7 +10,6 @@ export default class LoginPage {
 
 
     constructor(public page: Page) {
-
         this.username_textbox = page.getByPlaceholder('Enter email address');
         this.password_textbox = page.getByPlaceholder('Enter password');
         this.login_button = page.getByTestId('form-button-primary-Log in');

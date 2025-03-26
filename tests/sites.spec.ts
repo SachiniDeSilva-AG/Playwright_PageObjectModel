@@ -15,7 +15,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.millSummary);
     await sitesPage.fillSiteName(sitesData.millSiteName);
@@ -40,7 +41,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.crusherSummary);
     await sitesPage.fillSiteName(sitesData.crusherSiteName);
@@ -64,7 +66,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.refinerySummary);
     await sitesPage.fillSiteName(sitesData.refinerySiteName);
@@ -88,7 +91,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.productSummary);
     await sitesPage.fillSiteName(sitesData.productSiteName);
@@ -112,7 +116,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.oleochemicalSummary);
     await sitesPage.fillSiteName(sitesData.oleochemicalSiteName);
@@ -136,7 +141,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.traderSummary);
     await sitesPage.fillSiteName(sitesData.treaderSiteName);
@@ -160,7 +166,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.distributorSummary);
     await sitesPage.fillSiteName(sitesData.distributorSiteName);
@@ -184,7 +191,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.millSummary);
     await sitesPage.fillSiteName(sitesData.millSiteName);
@@ -215,7 +223,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.millSummary);
     await sitesPage.fillSiteName(sitesData.millSiteName);
@@ -245,7 +254,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.clickCancelAndNavigateToThePreviousPage();
   });
 
@@ -256,7 +266,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.clickBackAndNavigateToThePreviousPage();
     await sitesPage.clickCancelAndNavigateToThePreviousPage();
@@ -269,7 +280,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.crusherSummary);
     await sitesPage.fillSiteName(sitesData.crusherSiteName);
@@ -289,7 +301,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.clickOnNewSite();
-    await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    await sitesPage.selectOwnership(sitesData.ownership);
     await sitesPage.navigatesToNextPage();
     await sitesPage.fillSiteSummary(sitesData.siteSummary);
     await sitesPage.fillSiteName(sitesData.siteName);
@@ -316,6 +329,7 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await sitesPage.updateSiteAddress(sitesData.updateSiteAddressStreet, sitesData.updateSiteAddressUnitNo, sitesData.updateSiteAddressCity, sitesData.updateSiteAddressState, sitesData.updateSiteAddressZip);
     await sitesPage.updateAssociation(sitesData.updateSiteAssociation);
     await sitesPage.saveUpdatedChanges();
+    await sitesPage.verifySavedAlert();
   });
 
   test('Verify adding new Site Business and updating the business -> PQ-737', async ({loginPage , dashboardPage, userManagementPage,entityManagementModule, sitesPage}) => {
@@ -325,7 +339,8 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     //await sitesPage.clickOnNewSite();
-    // await sitesPage.selectParentEntityAndOwnership(sitesData.parentEntityName, sitesData.ownership);
+    // await sitesPage.selectParentEntity(sitesData.parentEntityName);
+    //await sitesPage.selectOwnership(sitesData.ownership);
     // await sitesPage.navigatesToNextPage();
     // await sitesPage.fillSiteSummary(sitesData.millSummary);
     // await sitesPage.fillSiteName(sitesData.millSiteName);
@@ -356,6 +371,7 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await sitesPage.updateLongitude(sitesData.updateLongitude);
     await sitesPage.updateMillCapacity(sitesData.updateMillCapacity);
     await sitesPage.saveUpdatedChanges();
+    await sitesPage.verifySavedAlert();
     await sitesPage.deleteTheAddedBusiness();
   });
   test('Search for existing Site Name and click Apply Filters button -> PQ-103', async ({loginPage , dashboardPage, userManagementPage,entityManagementModule, sitesPage}) => {
@@ -365,7 +381,9 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
     await sitesPage.searchBySiteName(sitesData.siteNameSearch); 
-  });
+    await sitesPage.applyFilter();
+    await sitesPage.verifyTheFilteredSiteName();
+    });
   test('Select Parent Entity and Ownership (Legal Entity) filters and click Apply Filters button -> PQ-106', async ({loginPage , dashboardPage, userManagementPage,entityManagementModule, sitesPage}) => {
     await loginPage.userlogin(credentials.userName, credentials.passWord);
     await dashboardPage.verifytheDashboardTitle("Dashboard");
@@ -383,17 +401,13 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await dashboardPage.navigatestoEntityModule();
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
+    await sitesPage.searchBySiteID(sitesData.searchSiteID);
     await sitesPage.searchByParentEntity(sitesData.parentEntity);
     await sitesPage.searchByLegalEntity(sitesData.legalEntity);
     await sitesPage.applyFilter();
     await sitesPage.verifyFilterByLegalAndParentEntities();
     await sitesPage.expandTheToggleOfSiteName();
-    await sitesPage.verifyDataInTheSiteTable(); // verify the expected results
-    
+    await sitesPage.verifyTableValues(sitesData.expectedTable); 
   });
-  
-
-
-  
   })
   

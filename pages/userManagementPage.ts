@@ -40,9 +40,9 @@ export default class UserManagementPage {
         this.searchBar_text = page.getByPlaceholder('Search');
         this.apply_btn = page.getByTestId('form-button-primary-Apply filters');
         this.reset_btn = page.getByTestId('form-button-destructive-Reset');
-        this.userEmailfilterResult = page.locator('//*[@id="page-id"]//div[@role="cell"][@data-field="email"]/div[@title="qatstprisma+golivesachini@gmail.com"]');
-        this.useridfilterResult = page.locator('//*[@id="page-id"]//div[@role="cell"][@data-field="userId"]/div[@title="U25-1875384"]');
-        this.fullnamefilterResult = page.locator('//*[@id="page-id"]//div[@role="cell"][@data-field="fullName"]/div[contains(text(),"Sachini_golive deSilva")]');
+        this.userEmailfilterResult = page.locator('//div[@aria-rowindex="2"]/div[@data-field="email"]');//'//*[@id="page-id"]//div[@role="cell"][@data-field="email"]/div[@title="qatstprisma+golivesachini@gmail.com"]');
+        this.useridfilterResult = page.locator('//div[@aria-rowindex="2"]/div[@data-field="userId"]');
+        this.fullnamefilterResult = page.locator('//div[@aria-rowindex="2"]/div[@data-field="fullName"]');
         this.addexistingUser_button = page.getByTestId('add-exist-user-btn');
         this.addexistingUser_text = page.locator('.MuiPaper-root.MuiDialog-paperWidthMd.MuiDialog-paperFullWidth h4');
         this.addexistingUserNext_bttton = page.getByTestId('form-button-primary-Next');
@@ -77,54 +77,54 @@ export default class UserManagementPage {
     async verifyFilterSearchUsingEmail(email: string) {
         const searchBar_txt = this.searchBar_text
         await searchBar_txt.fill(email)
-        console.log("-------------User name " + email + " added.-------------")
+        console.log("-------------User name " + email + " added.-------------");
+    }
+    async applyFilter() {
         const applyfilter = this.apply_btn
         await this.apply_btn.click({ timeout: 30000 });
+        console.log("-------------Apply button clicked.-------------");
+    }
+    async verifyFilterResultsForUserEmail(){
         const userfilterRslt = this.userEmailfilterResult;
         //const userEmail = userfilterRslt.nth(1);
         await expect(userfilterRslt).toBeVisible;
-        console.log("-------------Filtered email displayed.-------------")
+        console.log("-------------Filtered email displayed.-------------");
+    }
+    async applyReset() {
         const resetbtn = this.reset_btn
         await resetbtn.click();
-
+        console.log("-------------Reset button clicked.-------------");
     }
 
     async verifyFilterSearchUsingPrismaId(userId: string) {
         const searchBar_txt = this.searchBar_text
         await searchBar_txt.fill(userId);
-        console.log("-------------User ID " + userId + " added.-------------")
-        await this.apply_btn.click();
-        const applyfilter = this.apply_btn
-        await this.apply_btn.click();
+        console.log("-------------User ID " + userId + " added.-------------");
+    }
+    async verifyFilterResultsForPrismaId(){    
         const useridfilterRslt = this.useridfilterResult
         //const prismauserId = useridfilterRslt.nth(1);
         await expect(useridfilterRslt).toBeVisible();
-        console.log("-------------Filtered userId displayed.-------------")
-        const resetbtn = this.reset_btn
-        await resetbtn.click();
+        console.log("-------------Filtered userId displayed.-------------");
     }
 
-    async verifyFilterSearchUsingFullName(fullname: string) {
+    async verifyFilterSearchUsingFullName(fullname: string) { //break the methods
         const searchBar_txt = this.searchBar_text
         await searchBar_txt.fill(fullname);
-        console.log("-------------User name " + fullname + " added.-------------")
-        await this.apply_btn.click();
-        const applyfilter = this.apply_btn
+        console.log("-------------User name " + fullname + " added.-------------");
+    }
+    async verifyFilterResultsForFullName(){   
         const fullnamefilterRslt = this.fullnamefilterResult
        // const fullName = userfilterRslt.nth(3);
         await expect(fullnamefilterRslt).toBeVisible();
-        console.log("-------------Filtered fullname displayed.-------------")
-        const resetbtn = this.reset_btn
-        await resetbtn.click();
-
-    }
-
+        console.log("-------------Filtered fullname displayed.-------------");
+}
     async verifytheAddExistingUserUsingEmail(addexistinguser: string,emailsearch) {
         const addexistingUser_btn = this.addexistingUser_button
         await addexistingUser_btn.click();
         const addexistingUser_txt = this.addexistingUser_text
         await expect(addexistingUser_txt).toHaveText(addexistinguser)
-        console.log("---------Add existing user popup displayed.---------")
+        console.log("---------Add existing user popup displayed.---------");
 
         const addexistingUserNext_btn = this.addexistingUserNext_bttton
         await addexistingUserNext_btn.click({ force: true });
@@ -132,7 +132,7 @@ export default class UserManagementPage {
         const searchbyidoremail_txt = this.searchbyidoremail_text
         await searchbyidoremail_txt.fill(emailsearch, { timeout: 30000 });
         await searchbyidoremail_txt.press('Enter')
-        console.log("---------Search results displayed for email search.---------")
+        console.log("---------Search results displayed for email search.---------");
         await this.selectemailoption.click();
         await this.addExistingUserAdd_button.click();
         const addExistingUserConfirm_btn = this.addExistingUserConfirm_button
@@ -146,7 +146,7 @@ export default class UserManagementPage {
         await addexistingUser_btn.click();
         const addexistingUser_txt = this.addexistingUser_text
         await expect(addexistingUser_txt).toHaveText(addexistinguser)
-        console.log("---------Add existing user popup displayed.---------")
+        console.log("---------Add existing user popup displayed.---------");
 
         const addexistingUserNext_btn = this.addexistingUserNext_bttton
         await addexistingUserNext_btn.click({ force: true });
@@ -161,7 +161,6 @@ export default class UserManagementPage {
         await addExistingUserConfirm_btn.click({ timeout: 20000 });
         const addExistUserFeedback_msg = this.addExistingUserFeedback_msg
         await expect(addExistUserFeedback_msg).toHaveText(/New users added/);
-
     }
 
     async verifyInvitingNewUser(inviteuser: string) {
@@ -218,8 +217,7 @@ export default class UserManagementPage {
 
         const inviteOkay_btn = this.inviteOkay_button
         await inviteOkay_btn.click();
-        console.log("---------Invite User dialog box closed.---------")
-
+        console.log("---------Invite User dialog box closed.---------");
     }
 
     async selectLastEmailAndRemove() {

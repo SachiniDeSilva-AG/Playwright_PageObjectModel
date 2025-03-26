@@ -81,12 +81,13 @@ export default class ParentEntitiesPage {
         console.log("-------------Parent Entity Type displayed.-----------");
     }
 
-    async verifyUpdatingOfTheSstRegistrationNumberAndMailingAddress(sstRegistrationNo: string, mailingAddressStreet: string, mailingAddressUnitNo: string, mailingAddressCity: string, mailingAddressState: string, mailingAddressZip: string) {
+    async verifyTheUpdateOfTheSstRegistrationNumber(sstRegistrationNo: string) {
         const sstRegistrationNum_txt = this.sstRegistrationNum_textBox;
         await sstRegistrationNum_txt.clear();
         await sstRegistrationNum_txt.fill(sstRegistrationNo);
         console.log("-------------Enter SSTRegistration Number.-----------");
-
+    }
+    async verifyTheUpdateOfTheMailingAddress(mailingAddressStreet: string, mailingAddressUnitNo: string, mailingAddressCity: string, mailingAddressState: string, mailingAddressZip: string) {
         const mailingAddressStreet_txt = this.mailingAddressStreet_textBox
         await mailingAddressStreet_txt. clear();
         await mailingAddressStreet_txt.fill(mailingAddressStreet);
@@ -107,11 +108,8 @@ export default class ParentEntitiesPage {
         await mailingAddressZip_txt.clear();
         await mailingAddressZip_txt.fill(mailingAddressZip);
         console.log("-------------Enter Mailing street, UnitNo, City, State, Zip.-----------");
-
-        const saveChanges_btn = this.saveChanges_button;
-        await saveChanges_btn.scrollIntoViewIfNeeded();
-        await saveChanges_btn.click();
-
+    }
+    async verifyTheSuccessAlert() {
         const saveChangesSuccessMsg = this.saveChangesSuccessAlert;
         await saveChangesSuccessMsg.isVisible();
         console.log("-------------Success message is displayed.-----------");
@@ -140,15 +138,6 @@ export default class ParentEntitiesPage {
         await billingAddressZip_txt.clear();
         await billingAddressZip_txt.fill(billingAddressZip);
         console.log("-------------Enter Billing street, UnitNo, City, State, Zip.-----------");
-
-        const saveChanges_btn = this.saveChanges_button;
-        await saveChanges_btn.scrollIntoViewIfNeeded();
-        await saveChanges_btn.click();
-
-        const saveChangesSuccessMsg = this.saveChangesSuccessAlert;
-        await saveChangesSuccessMsg.isVisible();
-        console.log("-------------Success message is displayed.-----------");
-        await this.successAlertClose_button.click();
     }
 
     async verifyUpdatingBillingCountry(billingCountry: string) {
@@ -158,28 +147,28 @@ export default class ParentEntitiesPage {
 
         const countryOption = this.page.locator(`li[role='option'] >> text=${billingCountry}`);
         await countryOption.click();
-
         console.log(`-------------Selected billing country:${billingCountry}-------------`);
     }
-        async verifyUpdatingTaxAndBillingPerson(taxNumber: string, billingPersonName: string, bilingPersonEmail: string) {
+        async verifyUpdatingTaxNumber(taxNumber: string) {
         const taxNumber_txt = this.taxNumber_text
         await taxNumber_txt.fill(taxNumber);
-
+        console.log(`-------------Updated the Tax Number:${taxNumber}-------------`);
+        }
+        async verifyUpdatingTheBillingPersonName(billingPersonName: string) {
         const billingPersonName_txt = this.billingPersonName_text
         await billingPersonName_txt.fill(billingPersonName);
-
+        console.log(`-------------Updated the Tax Number:${billingPersonName}-------------`);
+        }
+        async verifyUpdatingTheBillingPersonEmail(bilingPersonEmail: string) {
         const billingPersonEmail_txt = this.billingPersonEmail_text
         await billingPersonEmail_txt.fill(bilingPersonEmail);
-
+        console.log(`-------------Updated the Tax Number:${bilingPersonEmail}-------------`);
+        }
+        async verifySavingTheUpdatedChanges() {
         const saveChanges_btn = this.saveChanges_button;
         await saveChanges_btn.scrollIntoViewIfNeeded();
         await saveChanges_btn.click();
-
-        const saveChangesSuccessMsg = this.saveChangesSuccessAlert;
-        await saveChangesSuccessMsg.isVisible();
-        console.log("-------------Success message is displayed.-----------");
-        await this.successAlertClose_button.click();
-      
-    }
+        console.log(`-------------Saved the updated changes.-------------`);
+        }
 
 }
