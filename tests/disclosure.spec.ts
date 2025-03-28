@@ -92,5 +92,6 @@ test.describe("Supply Base verifications for RSPO Member", async () => {
   await disclosureGrowerPage.verifyTheDisclosureComment(disclosureData.comment);
   await disclosureGrowerPage.submitVerificationComment();
   await disclosureGrowerPage.verifyTheDisclosureSuccessAlert();
+  await loginPage.verifyTheLogout();
 });
 })

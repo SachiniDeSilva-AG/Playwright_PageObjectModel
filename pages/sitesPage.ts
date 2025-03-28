@@ -273,12 +273,12 @@ export default class SitesPage {
         console.log("-------------Site ID " + siteId + " added.-------------");
     }
     async verifySiteFilter (){
-        const siteResult_lst = this.siteResult
+        const siteResult_lst = this.siteResult.first();
         await expect(siteResult_lst).toBeVisible();
         console.log("-------------Filtered Site Id displayed.-------------");
     }
     async clickOnFilteredResult() {
-        const siteResult_lst = this.siteResult
+        const siteResult_lst = this.siteResult.first();
         await siteResult_lst.click();
         const siteHeader_lbl = this.siteHeader
         await expect(siteHeader_lbl).toBeVisible();
@@ -373,7 +373,7 @@ export default class SitesPage {
         console.log("-------------Site Name " + siteNameSearch + " added.-------------");
     }
     async verifyTheFilteredSiteName() {
-        const siteResult_lst = this.siteResult
+        const siteResult_lst = this.siteResult.first();
         await expect(siteResult_lst).toBeVisible();
         console.log("-------------Filtered Site Name displayed.-------------");
     }
