@@ -34,7 +34,7 @@ export default class smallholdersPage {
 
     constructor(public page: Page) {
         this.smallholderSearch_text = page.locator('//*[@id="filterSearch"]');
-        this.reset_button = page.locator('//*[@id="page-id"]//button[@data-testid="form-button-destructive-Reset"]');
+        this.reset_button = page.locator('//button[@data-testid="form-button-destructive-Reset"]');
         this.applyFilters = page.locator('//*[@data-testid="form-button-primary-Apply filters"]');
         this.shParentEntity_field = page.locator('//*[@id="filterEntity"]');
         this.shLegalEntity_field = page.locator('//div[@name="filterLegalEntity"]//input[@id="combobox-filterLegalEntity"]');

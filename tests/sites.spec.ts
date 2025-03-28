@@ -390,6 +390,7 @@ test.describe("Sites page verifications for RSPO Member", async () => {
     await dashboardPage.navigatestoEntityModule();
     await userManagementPage.verifyUserManagementTitle("User management");
     await entityManagementModule.navigationToAssetsPage(); 
+    await sitesPage.searchBySiteID(sitesData.searchSiteID);
     await sitesPage.searchByParentEntity(sitesData.parentEntity);
     await sitesPage.searchByLegalEntity(sitesData.legalEntity);
     await sitesPage.applyFilter();

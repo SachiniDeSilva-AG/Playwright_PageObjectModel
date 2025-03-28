@@ -56,7 +56,7 @@ export default class SitesPage {
     readonly expandToggle: Locator;
     readonly expandedBusinessTypes: Locator;
     readonly expandedCoordinates: Locator;
-    readonly firstCellValue  : Locator;
+    readonly tableRows  : Locator;
     readonly ownershipOpen_button : Locator;
 
     constructor(public page: Page) {
@@ -93,7 +93,7 @@ export default class SitesPage {
         this.feedbackMessage = page.locator('//div[@data-testid="feedback-message"]//following-sibling::div[text()="New Site created."]');
         this.sitesSearchBar = page.locator('//input[@id="filterSearch"]');
         this.applyFilters = page.locator('//button[@data-testid="form-button-primary-Apply filters"]');
-        this.siteResult = page.locator('//div[@id="page-id"]//div[@role="cell"][@data-field="siteId"]/div[@title="S25-022101"]');
+        this.siteResult = page.locator('//div[@role="cell"][@aria-colindex="3"][@data-field="siteId"]');
         this.reset_btn = page.getByTestId('form-button-destructive-Reset');
         this.siteHeader = page.locator('//*[@id="page-id"]//h1[text()]');
         this.saveChanges_button = page.locator('//button[@data-testid="form-button-primary-Save changes"]');
@@ -112,7 +112,7 @@ export default class SitesPage {
         this.expandToggle = page.locator('//*[@id="page-id"]//div[@data-field="__detail_panel_toggle__"]/button');
         this.expandedBusinessTypes = page.locator('//div[@id="page-id"]//h6[text()="Business Types"]');
         this.expandedCoordinates = page.locator('//div[@id="page-id"]//h6[text()="Coordinates (Lat, Long)"]');
-        this.firstCellValue = page.locator('//table/tbody/tr[1]/td[text()="MILL"]');  //await page.locator('table tbody tr:nth-child(2) td:nth-child(3)').textContent();
+        this.tableRows = page.locator('//div//table/tbody/tr'); 
         this.ownershipOpen_button = page.locator('//*[@id="filterSection-flex-container"]//div/button[@title="Open"]');
     }
 
@@ -413,7 +413,7 @@ export default class SitesPage {
         console.log("-------------Site details expanded.-------------");
     }
     async verifyTableValues(expectedTable: string[][]): Promise<void> {
-        const rows = this.page.locator("//div//table/tbody/tr");
+        const rows = this.tableRows //this.page.locator("//div//table/tbody/tr");
         const rowCount = await rows.count();
     
         for (let i = 0; i < rowCount; i++) {

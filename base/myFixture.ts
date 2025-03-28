@@ -12,6 +12,7 @@ import SupplyBasePage from "../pages/supplyBasePage";
 import SmallHoldersPage from "../pages/smallholdersPage";
 import ManagementUnitPage from "../pages/managementUnitPage";
 import DisclosureGrowerPage from "../pages/disclosureGrowerPage";
+import SmallHolderPlotsPage from "../pages/smallholderPlotsPage";
 
 
 type pages = {
@@ -27,7 +28,8 @@ type pages = {
     supplyBasePage: SupplyBasePage;
     smallholdersPage: SmallHoldersPage;
     managementUnitPage: ManagementUnitPage;
-    disclosureGrowerPage : DisclosureGrowerPage
+    disclosureGrowerPage : DisclosureGrowerPage;
+    smallholderPlotsPage : SmallHolderPlotsPage;
 }
 
 const testPages = base.extend<pages>({
@@ -70,6 +72,9 @@ const testPages = base.extend<pages>({
     },
     disclosureGrowerPage : async({page}, use) => {
         await use(new DisclosureGrowerPage(page))
+    },
+    smallholderPlotsPage : async({page}, use) => {
+        await use(new SmallHolderPlotsPage(page))
     },
 
 })
